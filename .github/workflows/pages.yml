@@ -1,0 +1,40 @@
+name: Test and deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+      - name: Check shell scripts
+        run: for f in scripts/*.sh; do bash -n "$f"; done
+
+  # Publishes the site to the gh-pages branch, which GitHub Pages serves.
+  deploy:
+    needs: test
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Collect site files
+        run: |
+          mkdir _site
+          cp -r index.html assets scripts _site/
+          touch _site/.nojekyll
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          commit_message: Deploy site

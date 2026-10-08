@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Research Repository – OS PBL</title>
+<meta name="description" content="Digital Research Repository with working simulations of the Operating Systems concepts it relies on: CPU scheduling, threads, RTOS scheduling, process synchronisation and deadlock handling.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232a78d6'/%3E%3Ctext x='16' y='21' font-family='Arial' font-size='13' font-weight='700' fill='white' text-anchor='middle'%3EDR%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<div class="topbar">
+  <button id="menu" aria-label="Open menu">☰</button>
+  <b>Digital Research Repository</b>
+</div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="brand"><div class="brand-mark">DR</div><div><b>Digital Research Repository</b><span>Operating Systems PBL · Group 87</span></div></div>
+    <nav class="nav" id="nav">
+      <a href="#/">Overview</a>
+      <a href="#/repository">Repository</a>
+      <div class="nav-group">Unit 1 · Shell scripting</div>
+      <a href="#/scripts">Admin shell scripts</a>
+      <div class="nav-group">Unit 2 · Processes &amp; threads</div>
+      <a href="#/scheduling">CPU scheduling</a>
+      <a href="#/threads">Threads &amp; models</a>
+      <a href="#/rtos">Case study: RTOS</a>
+      <div class="nav-group">Unit 3 · Concurrency &amp; deadlock</div>
+      <a href="#/sync">Critical section</a>
+      <a href="#/problems">Classical problems</a>
+      <a href="#/deadlock">Deadlock &amp; Banker's</a>
+      <a href="#/database">Case study: DB deadlocks</a>
+    </nav>
+    <div class="side-foot">
+      <a href="https://github.com/utk042/OS_PBL" target="_blank" rel="noopener">Source on GitHub</a><br>
+      <button class="small" id="theme" type="button">Toggle theme</button>
+    </div>
+  </aside>
+  <main id="view" tabindex="-1"></main>
+</div>
+<script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
