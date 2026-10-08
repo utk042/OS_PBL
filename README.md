@@ -56,6 +56,6 @@ app.py                   Python server prototype
 
 ## Deployment
 
-`.github/workflows/pages.yml` runs the tests and publishes the site to GitHub Pages
-on every push to `main`. In the repository settings, set **Pages → Source** to
-**GitHub Actions** once.
+`.github/workflows/pages.yml` runs the tests on every push and pull request. On a push
+to `main` it copies the site (`index.html`, `assets/`, `scripts/`) to the `gh-pages`
+branch, which GitHub Pages serves at https://utk042.github.io/OS_PBL/.
