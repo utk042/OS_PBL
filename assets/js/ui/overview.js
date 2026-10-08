@@ -34,8 +34,8 @@ export function render(root) {
     </div>
     <div class="card">
       <h2>Progress</h2>
-      <div class="progress" aria-label="50 percent complete"><div style="width:50%"></div></div>
-      <p class="sub" style="margin-top:8px"><b>50%</b> at Review 2: Units 1–3 implemented. Unit 4 (memory management, virtual memory, file and disk management) is planned for the final review.</p>
+      <div class="progress" aria-label="60 percent complete"><div style="width:60%"></div></div>
+      <p class="sub" style="margin-top:8px"><b>60%</b> at Review 2: Units 1–3 implemented. Unit 4 (memory management, virtual memory, file and disk management) is planned for the final review.</p>
       <p class="sub">Team (Group 87): Utkarsh Raj Shukla, Vivek Kumar, Vishal Gupta, Yash Srivastava, Nishant Kumar Mahto.</p>
       <p class="sub">Faculty: Dr. Neeti Taneja.</p>
     </div>
