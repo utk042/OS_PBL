@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Ethics One-Pager</title>
+<style>
+  @page { size: A4; margin: 4mm; }
+  :root{
+    --ink:#111; --mut:#444; --p1:#c0392b; --p2:#d35400; --p3:#2471a3;
+    --kw:#5b2c6f; --kwbg:#f3e8f8; --box:#f6f6f6; --line:#bbb;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#fff;color:var(--ink)}
+  body{font:5.6pt/1.15 "DejaVu Sans Condensed","Arial Narrow",Arial,sans-serif;}
+  header{display:flex;justify-content:space-between;align-items:center;border-bottom:1.4px solid #000;padding-bottom:1.5px;margin-bottom:2px}
+  header h1{font-size:10.5pt;margin:0;letter-spacing:.2px}
+  header .sub{font-size:6.3pt;color:var(--mut)}
+  .legend span{margin-left:6px;font-weight:bold}
+  .cols{column-count:4;column-gap:4px;column-rule:.5px solid var(--line)}
+  section{break-inside:avoid;margin:0 0 2px 0;padding:1.2px 2px;border:.6px solid var(--line);border-radius:2px}
+  section.p1{border-left:2.4px solid var(--p1)}
+  section.p2{border-left:2.4px solid var(--p2)}
+  section.p3{border-left:2.4px solid var(--p3)}
+  h2{font-size:6.6pt;margin:0 0 .8px 0;display:flex;justify-content:space-between;gap:4px}
+  h2 .st{white-space:nowrap}
+  .p1 .st{color:var(--p1)} .p2 .st{color:var(--p2)} .p3 .st{color:var(--p3)}
+  .unit{font-size:5.3pt;font-weight:normal;color:var(--mut)}
+  h3{font-size:6.3pt;margin:1.3px 0 .3px;color:#000;text-decoration:underline}
+  p{margin:.4px 0}
+  ul{margin:.2px 0 .4px 0;padding-left:8px}
+  li{margin:0}
+  b{color:#000}
+  .k{background:var(--kwbg);color:var(--kw);font-weight:bold;padding:0 1.5px;border-radius:1.5px}
+  .kw{font-size:5.5pt;color:var(--kw);margin-top:.6px;border-top:.4px dashed var(--line);padding-top:.5px}
+  .kw::before{content:"🔑 ";}
+  .eg{color:#1e6b35;font-style:italic}
+  .tip{background:#fff6d6;border:.4px solid #e2c044;padding:.6px 2px;margin-top:.8px;border-radius:1.5px}
+  table{border-collapse:collapse;width:100%;margin:.6px 0}
+  th,td{border:.4px solid #999;padding:.2px 1.2px;overflow-wrap:break-word;vertical-align:top;text-align:left}
+  th{background:#e8e8e8}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+  .mini{font-size:5.6pt}
+  .flow{font-weight:bold;text-align:center;background:var(--box);padding:.6px;margin:.6px 0;border-radius:1.5px}
+  footer{margin-top:1px;border-top:1.2px solid #000;padding-top:1.2px;font-size:5.8pt}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>AI Ethics &amp; Cybersecurity — One-Page Cheat Sheet</h1>
+    <div class="sub">Unit 2 (Fairness, Bias &amp; GenAI) + Module 3 (Ethics &amp; Cybersecurity Principles) · purple = keyword to write in answers</div>
+  </div>
+  <div class="legend"><span style="color:var(--p1)">★★★ Must-know</span><span style="color:var(--p2)">★★ Important</span><span style="color:var(--p3)">★ Quick read</span></div>
+</header>
+
+<div class="cols">
+
+<!-- ================= UNIT 2 ================= -->
+
+<section class="p2">
+<h2>0. Basics: Bias vs Fairness <span class="unit">U2</span><span class="st">★★</span></h2>
+<p><b>Bias</b> = systematic error → unfair decisions (a.k.a. ML/algorithmic bias); sources: data collection, algorithm design, human bias. <b>Fairness</b> = correcting algorithmic bias so outcomes are just &amp; equitable w.r.t. <span class="k">sensitive/protected attributes</span> (race, gender, religion, age, SES).</p>
+<p><b>Types of bias (8):</b> Sampling · Algorithmic · Confirmation · Measurement · Generative · Reporting · Automation (trust machine over human) · Group-attribution (<i>in-group</i>, <i>out-group homogeneity</i>). Pipeline view: data (historical, representation, measurement) → modeling (evaluation, aggregation) → human review.</p>
+<p><b>Types of fairness (5):</b> <span class="k">Group</span> (groups treated equally) · <span class="k">Individual</span> (similar people → similar outcome) · <span class="k">Procedural</span> (fair, transparent process) · <span class="k">Counterfactual</span> (same result if attribute flipped) · <span class="k">Causal</span> (no decisions from historical inequality).</p>
+<p><b>Principles:</b> Non-discrimination, Equitable treatment, Transparency, Accountability, Ethical considerations.</p>
+<p><b>Impact — fair AI:</b> trust, equal opportunity, legal compliance, social cohesion, business benefit. <b>Biased AI:</b> reinforces inequity, loss of trust, discrimination (loans/jobs), legal risk, economic &amp; social cost.</p>
+<table class="mini"><tr><th></th><th>Bias</th><th>Fairness</th></tr>
+<tr><td>Nature</td><td>often unintentional, technical</td><td>deliberate, intentional goal</td></tr>
+<tr><td>Focus</td><td>accuracy/reliability</td><td>equitable treatment</td></tr>
+<tr><td>Measured by</td><td>accuracy, precision, recall</td><td>demographic parity, equal opp.</td></tr></table>
+</section>
+
+<section class="p1">
+<h2>1. Techniques for Measuring Fairness &amp; Bias <span class="unit">U2</span><span class="st">★★★</span></h2>
+<ol style="margin:.2px 0;padding-left:9px">
+<li><b>Disparate Impact Analysis</b> – does AI hurt one group more? Procedure: group fairness, statistical tests, thresholds. Used in hiring, lending, insurance.</li>
+<li><b>Fairness Through Awareness</b> – fairness metrics built into training/eval: Demographic Parity, Equal Opportunity, Equalized Odds.</li>
+<li><b>Counterfactual Fairness</b> – same outcome if sensitive attribute changed (individual fairness, counterfactuals).</li>
+<li><b>Explainability &amp; Interpretability</b> – feature importance, local explanations (LIME/SHAP).</li>
+<li><b>Bias Detection Tools</b> – bias metrics + auditing tools: <span class="k">AI Fairness 360</span> (IBM), <span class="k">What-If Tool</span> (Google).</li>
+<li><b>Human-in-the-Loop</b> – expert judgment, feedback loops.</li>
+<li><b>Ethical Impact Assessment</b> – stakeholder consultation, risk assessment, mitigation strategies.</li>
+</ol>
+<table class="mini">
+<tr><th>Metric</th><th>Condition (equal across groups)</th></tr>
+<tr><td>Demographic / Statistical Parity</td><td>P(Ŷ=1 | A=a) = P(Ŷ=1 | A=b) — same positive rate</td></tr>
+<tr><td>Equal Opportunity</td><td>same <b>TPR</b> (true-positive rate)</td></tr>
+<tr><td>Equalized Odds</td><td>same <b>TPR and FPR</b></td></tr>
+<tr><td>Disparate Impact (DI)</td><td>DI = P(Ŷ=1|unpriv) ÷ P(Ŷ=1|priv); <b>DI &lt; 0.8 → biased</b> (4/5ths / 80% rule)</td></tr>
+</table>
+<p class="eg">Ex: loan approval women 30%, men 50% → DI = 0.6 &lt; 0.8 ⇒ disparate impact.</p>
+<div class="kw">disparate impact · 80% rule · TPR/FPR · counterfactual · AIF360 · What-If Tool · human-in-the-loop</div>
+</section>
+
+<section class="p1">
+<h2>2. Techniques for Mitigating Bias <span class="unit">U2</span><span class="st">★★★</span></h2>
+<div class="flow">Pre-processing → In-processing → Interpretability → Post-processing</div>
+<ol style="margin:.2px 0;padding-left:9px">
+<li><b>Data collection &amp; pre-processing:</b> diverse &amp; representative data; bias detection (statistical parity, disparate impact); augmentation, anonymization, careful sampling, <span class="k">reweighing</span>.</li>
+<li><b>Algorithmic fairness (in-processing):</b> <span class="k">fairness constraints</span> on sensitive attributes; <span class="k">fairness-aware algorithms</span> optimizing equal opportunity / equalized odds; regularization.</li>
+<li><b>Interpretability &amp; transparency:</b> <span class="k">XAI</span>; regular <span class="k">bias audits</span>.</li>
+<li><b>Post-processing:</b> reweighing, demographic parity adjustment, <span class="k">disparate impact remover</span>, threshold adjustment — applied after training.</li>
+</ol>
+<p><b>7-step holistic approach:</b> Data &amp; preprocessing → Algorithm design → Fairness-aware training → Evaluation/testing (bias audits) → Transparency/XAI → Monitoring &amp; accountability → Policy, regulation &amp; governance.</p>
+</section>
+
+<section class="p2">
+<h2>3. Policies &amp; Frameworks for Fairness <span class="unit">U2</span><span class="st">★★</span></h2>
+<div class="g2">
+<div><b>Policies</b><ul>
+<li>Ethical AI principles: fairness, accountability, transparency</li>
+<li><span class="k">GDPR</span>: rules on automated decision-making (Art. 22)</li>
+<li><span class="k">Algorithmic Accountability Act</span> (US, <i>proposed</i>)</li>
+<li><span class="k">IEEE P7003</span> – algorithmic bias considerations</li>
+<li>Industry-association AI ethics guidelines</li></ul></div>
+<div><b>Frameworks</b><ul>
+<li>Definitions: group, individual, <span class="k">intersectional</span> (multiple attributes together)</li>
+<li>Metrics: disparate impact, equal-opportunity difference; evaluation protocols over lifecycle</li>
+<li>Continuous monitoring: feedback loops, stakeholder engagement</li></ul></div>
+</div>
+</section>
+
+<section class="p2">
+<h2>4. Bias in Data Collection <span class="unit">U2</span><span class="st">★★</span></h2>
+<p>Systematic errors introduced when data is gathered/processed → unfair outcomes.</p>
+<table class="mini">
+<tr><th>Type</th><th>Meaning</th><th>Example</th></tr>
+<tr><td><b>Selection</b></td><td>groups excluded / under-represented</td><td>recruitment data missing some demographics</td></tr>
+<tr><td><b>Sampling</b></td><td>selection method favours outcomes</td><td>poll over-represents one party</td></tr>
+<tr><td><b>Measurement</b></td><td>tools mis-measure some groups</td><td>scales calibrated differently</td></tr>
+<tr><td><b>Reporting</b></td><td>selective reporting</td><td>negative drug trials unpublished</td></tr>
+</table>
+<p><b>Causes:</b> historical bias · algorithmic bias (facial recognition less accurate on some groups) · cultural/contextual bias. <b>Impact:</b> unfair treatment, inaccurate predictions, loss of trust. <b>Mitigate:</b> diverse data, bias detection &amp; correction, transparency/documentation, community engagement.</p>
+</section>
+
+<section class="p2">
+<h2>5. Fairness in Data Processing <span class="unit">U2</span><span class="st">★★</span></h2>
+<p><b>Techniques:</b> bias detection &amp; mitigation (demographic parity, equalized odds, DI analysis) · algorithmic fairness · model interpretability (XAI, auditable) · <span class="k">data governance</span> &amp; ethics frameworks.</p>
+<p><b>Challenges:</b> fairness definitions complex &amp; context-dependent · data-quality issues · <span class="k">fairness vs utility trade-off</span>.</p>
+<p><b>Best practices:</b> diverse stakeholder engagement · continuous monitoring &amp; evaluation · education &amp; training.</p>
+</section>
+
+<section class="p3">
+<h2>6. Generative AI <span class="unit">U2</span><span class="st">★</span></h2>
+<p>AI that <b>learns patterns</b> from data and <b>generates new content</b> (text, image, video, music, 3D). Driven by <span class="k">LLMs</span> / <span class="k">foundation models</span>.</p>
+<p><b>Works in 3 phases:</b> ① <b>Training</b> → foundation model on huge data ② <b>Tuning</b> → <span class="k">fine-tuning</span> (labeled task data) / <span class="k">RLHF</span> (humans score outputs) ③ <b>Generation, evaluation, re-tuning</b> (+ <span class="k">RAG</span> = retrieve external docs → generate; current &amp; verifiable).</p>
+<p><b>Architectures:</b> <b>VAE</b> (compress features → variations; 2013) · <b>GAN</b> (generator vs discriminator; 2014) · <b>Diffusion</b> (remove noise step-by-step; DALL·E) · <b>Transformer</b> (<span class="k">attention</span>; "Attention Is All You Need" 2017; basis of GPT).</p>
+<p><b>Key concepts:</b> generative models · <span class="k">latent space</span> (hidden representation; sample → diverse outputs) · <span class="k">backpropagation</span> (find where error came from) · <span class="k">gradient descent</span> (reduce error).</p>
+<p><b>Timeline:</b> ELIZA 1964 → GPU (GeForce 256) 1999 → Autocomplete 2004 (Markov chain) → VAE 2013 → GAN 2014 → Transformer 2017 → GPT-2/3 2019-20 → ChatGPT 2022 → Gemini, Copilot, Llama, watsonx.</p>
+<p><b>Applications:</b> creative arts, content/marketing, healthcare (synthetic images), gaming/VR, personalization. <b>Advantages:</b> creativity, faster decisions, dynamic personalization, 24×7.</p>
+<p><b>Risks:</b> <span class="k">hallucination</span> (fix: guardrails, RAG) · inconsistent output (prompt engineering) · bias · black box (XAI) · security/privacy/IP · <span class="k">deepfakes</span>. <b>GenAI vs AI:</b> creates new content vs predicts/classifies.</p>
+</section>
+
+<section class="p1">
+<h2>7. Types of Bias in Generative AI <span class="unit">U2</span><span class="st">★★★</span></h2>
+<p>Unintended, systematic distortions in generated content reflecting bias in training data or model.</p>
+<table class="mini">
+<tr><th>Type</th><th>Example → rule</th></tr>
+<tr><td><b>Dataset</b></td><td>"engineer" images mostly men → <i>biased data → biased output</i></td></tr>
+<tr><td><b>Sampling</b></td><td>mostly young people's opinions → <i>less diverse output</i></td></tr>
+<tr><td><b>Representation</b></td><td>a gender always shown in one job → <i>stereotypes</i></td></tr>
+<tr><td><b>Cultural</b></td><td>Western-trained AI misreads Indian practices → <i>limited perspective</i></td></tr>
+<tr><td><b>Algorithmic</b></td><td>design over-weights certain features → unfair output</td></tr>
+<tr><td><b>Stereotype amplification</b></td><td>repeats &amp; strengthens existing stereotypes</td></tr>
+</table>
+<p><b>Prevention (7):</b> ① diverse data (collection, sampling, augmentation) ② bias detection (pre-training analysis, reweighting) ③ fairness-aware algorithms (metrics in objective/regularization) ④ transparency &amp; XAI + documentation ⑤ ethical guidelines &amp; governance, diverse stakeholders ⑥ continuous post-deployment monitoring, feedback loops ⑦ education &amp; awareness. (+ human-in-the-loop review)</p>
+<div class="tip">Mnemonic <b>"DS-RCAS"</b>: Dataset, Sampling, Representation, Cultural, Algorithmic, Stereotype.</div>
+</section>
+
+<!-- ================= MODULE 3 ================= -->
+
+<section class="p2">
+<h2>8. Importance of Privacy &amp; Security in AI <span class="unit">M3</span><span class="st">★★</span></h2>
+<ul>
+<li><b>Protect personal info</b> → prevents identity theft, fraud</li>
+<li><b>Build trust</b> → users adopt trusted AI</li>
+<li><b>Regulatory compliance</b> → GDPR/HIPAA; avoid fines</li>
+<li><b>Ethical responsibility</b> → no misuse of data</li>
+<li><b>Prevent discrimination</b> → anonymize, reduce bias</li>
+<li><b>Model integrity</b> → defend against AI threats: <span class="k">data poisoning</span>, <span class="k">adversarial examples</span>, <span class="k">model inversion</span>, <span class="k">membership inference</span>, model theft, <span class="k">prompt injection</span></li>
+</ul>
+<p class="flow">AI + Data ⇒ Privacy (protect) + Ethics (use responsibly) + Fairness (avoid unfair outcomes)</p>
+<p><b>CIA triad:</b> Confidentiality · Integrity · Availability. <b>Privacy by design</b>, data minimisation, encryption, access control.</p>
+</section>
+
+<section class="p2">
+<h2>9. AI-Specific Security Tools &amp; Software <span class="unit">M3</span><span class="st">★★</span></h2>
+<table class="mini">
+<tr><th>Category</th><th>Purpose</th><th>Tools</th></tr>
+<tr><td><b>IDPS</b></td><td>detect/prevent suspicious network activity</td><td>Darktrace, Vectra</td></tr>
+<tr><td><b>Endpoint security</b></td><td>protect laptops, servers, phones</td><td>Cylance, CrowdStrike Falcon</td></tr>
+<tr><td><b>SIEM</b></td><td>collect &amp; analyse logs/events</td><td>Splunk, IBM QRadar</td></tr>
+<tr><td><b>UEBA</b></td><td>unusual user behaviour, insider threats</td><td>Exabeam, Securonix</td></tr>
+<tr><td><b>Threat intel</b></td><td>info on cyber threats</td><td>Recorded Future, ThreatConnect</td></tr>
+<tr><td><b>Incident response (SOAR)</b></td><td>automate/orchestrate response</td><td>Cortex XSOAR, Swimlane</td></tr>
+<tr><td><b>Fraud detection</b></td><td>suspicious transactions</td><td>Kount, Sift Science</td></tr>
+<tr><td><b>Phishing detection</b></td><td>block malicious emails</td><td>Area 1, Cofense</td></tr>
+<tr><td><b>IAM</b></td><td>who accesses what; adaptive MFA</td><td>SailPoint, Okta</td></tr>
+</table>
+<div class="tip">Mnemonic <b>"I-E-S-U-T-I-F-P-I"</b> → "<b>I E</b>at <b>S</b>ome <b>U</b>nusual <b>T</b>acos, <b>I F</b>eel <b>P</b>retty <b>I</b>ll"</div>
+</section>
+
+<section class="p1">
+<h2>10. PPML – Privacy-Preserving ML <span class="unit">M3</span><span class="st">★★★</span></h2>
+<p>Train useful models <b>without exposing individual data</b>; balance <span class="k">utility vs privacy</span>.</p>
+<table class="mini">
+<tr><th>Technique</th><th>Idea</th><th>Example</th></tr>
+<tr><td><b>Federated Learning</b></td><td>train on devices; raw data stays local; only <b>model updates</b> sent; server aggregates (FedAvg)</td><td>3 hospitals train locally; Gboard keyboard</td></tr>
+<tr><td><b>Differential Privacy</b></td><td>add calibrated <b>noise</b> so one person's presence/absence doesn't change result; privacy budget <span class="k">ε</span> (smaller ε = more privacy)</td><td>avg salary 50,000 → released 50,120</td></tr>
+<tr><td><b>Homomorphic Encryption</b></td><td>compute on <b>encrypted</b> data without decrypting (partial / fully FHE)</td><td>cloud analyses encrypted patient records</td></tr>
+<tr><td><b>SMPC</b> (Secure Multi-Party Computation)</td><td>parties jointly compute a function without revealing inputs (secret sharing)</td><td>hospitals total 100+150+200=450, counts hidden</td></tr>
+</table>
+<p>Others: <span class="k">secure enclaves / TEE</span>, synthetic data, data anonymization before training.</p>
+</section>
+
+<section class="p1">
+<h2>11. PPDM – Privacy-Preserving Data Mining <span class="unit">M3</span><span class="st">★★★</span></h2>
+<p>Extract useful <b>patterns</b> while hiding sensitive info.</p>
+<ul>
+<li><b>Anonymization</b> (generalization/suppression; <span class="eg">Age 23 → 20-25, Noida → NCR, names removed</span>):
+ <ul>
+ <li><span class="k">k-anonymity</span>: each record indistinguishable from ≥ k−1 others (“who is this?”)</li>
+ <li><span class="k">l-diversity</span>: ≥ l distinct sensitive values per group (fixes homogeneity attack)</li>
+ <li><span class="k">t-closeness</span>: group's sensitive distribution within t of overall (fixes skew attack)</li>
+ </ul></li>
+<li><b>Data perturbation / randomization</b>: add noise/swap values (20,21,22,23 → 20,22,21,24), patterns kept</li>
+<li><b>Cryptographic</b>: encryption, HE, SMPC for distributed (horizontally/vertically partitioned) data</li>
+<li><b>Rule hiding</b>: suppress sensitive association rules</li>
+</ul>
+<table class="mini"><tr><th>PPML</th><th>PPDM</th></tr>
+<tr><td>protect privacy while <b>learning/training models</b> (FL, DP, HE, SMPC)</td><td>protect privacy while <b>mining patterns</b> (anonymize, perturb, crypto)</td></tr></table>
+<p>Strength: k &lt; l &lt; t. Trade-off: <b>more privacy = less data utility</b>.</p>
+</section>
+
+<section class="p1">
+<h2>12. Risk Management: Assessment &amp; Incident Response <span class="unit">M3</span><span class="st">★★★</span></h2>
+<h3>Risk Assessment – identify, evaluate, prioritize risks</h3>
+<ol style="margin:.2px 0;padding-left:9px">
+<li><b>Asset &amp; threat identification</b>: hackers, malware, insiders, disasters, AI attacks</li>
+<li><b>Vulnerability assessment</b>: bugs, misconfigs, human error, weak models</li>
+<li><b>Impact analysis</b>: operations, reputation, finance, assets</li>
+<li><b>Risk evaluation</b>: <span class="k">Risk = Likelihood × Impact (Severity)</span> → risk matrix (High/Med/Low)</li>
+<li><b>Mitigation / treatment</b>: technical controls, policy, training. Options: <span class="k">Avoid · Reduce · Transfer (insurance) · Accept</span></li>
+<li><b>Monitor &amp; review</b> continuously</li>
+</ol>
+<h3>Incident Response (NIST SP 800-61 lifecycle)</h3>
+<div class="flow">① Preparation → ② Detection &amp; Analysis → ③ Containment, Eradication &amp; Recovery → ④ Post-Incident Activity (lessons learned) ↺</div>
+<p>Preparation = IR plan, team (CSIRT), drills/tools. Detection = SIEM/IDS alerts, triage. Containment = isolate systems; Eradication = remove malware/root cause; Recovery = restore from backup, verify. Post-incident = review, report, update plan.</p>
+<p><b>Goal:</b> minimize damage, restore operations quickly, prevent recurrence. AI frameworks: <span class="k">NIST AI RMF</span> (Govern, Map, Measure, Manage).</p>
+</section>
+
+<section class="p1">
+<h2>13. Regulatory Compliance: GDPR vs HIPAA <span class="unit">M3</span><span class="st">★★★</span></h2>
+<table class="mini">
+<tr><th></th><th>GDPR (General Data Protection Regulation)</th><th>HIPAA (Health Insurance Portability &amp; Accountability Act)</th></tr>
+<tr><td>Region / year</td><td>EU/EEA · effective <b>25 May 2018</b></td><td>USA · <b>1996</b></td></tr>
+<tr><td>Protects</td><td>any <b>personal data</b> of individuals</td><td><b>PHI</b> – Protected Health Information (e-PHI)</td></tr>
+<tr><td>Applies to</td><td>any org processing EU residents' data, <b>anywhere</b> (extraterritorial)</td><td><b>Covered entities</b> (providers, health plans, clearinghouses) + <b>business associates</b> (BAA)</td></tr>
+<tr><td>Key rules</td><td>lawful basis/<b>consent</b>; principles: lawfulness, purpose limitation, data minimisation, accuracy, storage limitation, integrity &amp; confidentiality, accountability</td><td><b>Privacy Rule</b> (use/disclosure, minimum necessary) · <b>Security Rule</b> (administrative, physical, technical safeguards) · <b>Breach Notification Rule</b></td></tr>
+<tr><td>Rights</td><td>access, rectification, <b>erasure (right to be forgotten)</b>, portability, object, <b>no solely automated decisions (Art. 22)</b> → right to explanation</td><td>patients can access/obtain copies &amp; request corrections of their records</td></tr>
+<tr><td>Breach notice</td><td>to authority within <b>72 hours</b></td><td>to individuals within <b>60 days</b></td></tr>
+<tr><td>Penalty</td><td>up to <b>€20 M or 4%</b> of global turnover</td><td>tiered civil &amp; criminal penalties</td></tr>
+<tr><td>Tools</td><td><span class="k">DPIA</span>, DPO, privacy by design</td><td>de-identification (Safe Harbor: remove <b>18 identifiers</b>)</td></tr>
+</table>
+<p>AI relevance: lawful training data, consent, explainability, anonymize/pseudonymize, audit logs, encryption.</p>
+</section>
+
+<section class="p2">
+<h2>14. Ethics Across the AI Lifecycle <span class="unit">M3</span><span class="st">★★</span></h2>
+<p><b>Problem definition</b> (stakeholders, purpose, impact assessment) → <b>Data collection</b> (privacy GDPR/CCPA, informed consent, diverse data) → <b>Model development</b> (transparency, bias mitigation, accountability) → <b>Evaluation</b> (fairness across groups, adversarial robustness, explainability) → <b>Deployment</b> (monitoring, user training, feedback) → <b>Operation &amp; maintenance</b> (ongoing evaluation, model updates, ethical audits).</p>
+</section>
+
+<section class="p2">
+<h2>15. Case Studies: Implementing AI Ethics in Engineering <span class="unit">M3</span><span class="st">★★</span></h2>
+<p><b>Google AI Principles (2018):</b> socially beneficial, avoid unfair bias, safe, accountable, privacy, scientific excellence. <i>Implementation:</i> bias audits, diverse data, safety testing, AI ethics review board. <i>Outcome:</i> more trust, transparency, accountability, less bias.</p>
+<p><b>IBM AI Fairness 360:</b> open-source toolkit, 70+ metrics &amp; mitigation algorithms (reweighing, adversarial debiasing, reject-option). <b>Microsoft Responsible AI</b>: fairness, reliability &amp; safety, privacy &amp; security, inclusiveness, transparency, accountability.</p>
+<p><b>Failures (lessons):</b> <span class="k">Amazon hiring tool</span> (penalised women – trained on male-dominated CVs; scrapped) · <span class="k">COMPAS</span> (recidivism scores biased vs Black defendants) · facial recognition higher error on darker-skinned women.</p>
+<p><b>Other frameworks:</b> PAVED (Partnership on AI – transparency, fairness, accountability) · <span class="k">IEEE Global Initiative – Ethically Aligned Design</span> · EU AI Act (risk-based).</p>
+<p><b>Best-practice checklist:</b> ethics review → DPIA/impact assessment → diverse data &amp; documentation (datasheets, model cards) → fairness testing → XAI → security testing (red-team) → human oversight → monitoring &amp; audits.</p>
+</section>
+
+</div>
+
+<footer><b>LAST-MINUTE STRIP:</b>
+Metrics: DP · EO(TPR) · EOdds(TPR+FPR) · DI&lt;0.8 ✗ &nbsp;|&nbsp; Mitigate: Pre → In → Post &nbsp;|&nbsp;
+GenAI bias: Dataset · Sampling · Representation · Cultural · Algorithmic · Stereotype &nbsp;|&nbsp;
+PPML: FL (data local) · DP (noise, ε) · HE (compute encrypted) · SMPC (compute jointly) &nbsp;|&nbsp; PPDM: k / l / t + perturb + crypto &nbsp;|&nbsp;
+Risk = L × I; Avoid/Reduce/Transfer/Accept &nbsp;|&nbsp; IR: Prepare → Detect → Contain/Eradicate/Recover → Lessons &nbsp;|&nbsp;
+GDPR = EU personal data, 72 h, €20M/4% &nbsp;|&nbsp; HIPAA = US PHI, Privacy/Security/Breach rules, 60 days
+</footer>
+</body>
+</html>
