@@ -5,378 +5,439 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OS Sessional-2 Cheat Sheet</title>
 <style>
-:root{--ink:#111;--mute:#444;--line:#999;--hi:#fff3b0;--key:#0b4f9c;--bg:#fff;--box:#f4f4f4;--star:#c47a00;--red:#b00020}
+:root{--ink:#111;--mute:#444;--line:#999;--hi:#fff3b0;--key:#0b4f9c;--bg:#fff;--box:#f3f3f3;--red:#b00020;--def:#eef4fc}
 @page{size:A4 portrait;margin:4mm}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink)}
-body{font:5.15pt/1.13 "Arial Narrow",Arial,Helvetica,sans-serif;padding:5mm}
+body{font:5.85pt/1.14 Arial,Helvetica,sans-serif;padding:4mm}
 @media print{body{padding:0}}
-.page{column-count:4;column-gap:2.2mm;column-rule:.3pt solid var(--line)}
-header{column-span:all;display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.2pt solid var(--ink);margin-bottom:1mm;padding-bottom:.6mm}
-header h1{font-size:10pt;margin:0}
-header span{font-size:6pt;color:var(--mute)}
-section{break-inside:auto;margin:0 0 1mm}
-h2{font-size:6.1pt;margin:.8mm 0 .3mm;padding:.25mm 1mm;background:var(--ink);color:#fff;break-after:avoid}
-h2 .s{color:#ffd24d;float:right;letter-spacing:-.3pt}
-h3{font-size:5.6pt;margin:.5mm 0 .2mm;color:var(--key);break-after:avoid}
-p{margin:.2mm 0}
-ul{margin:.1mm 0 .3mm;padding-left:2.6mm}
-li{margin:0}
+.page{column-count:3;column-gap:2.6mm;column-rule:.3pt solid var(--line)}
+header{column-span:all;display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.2pt solid var(--ink);margin-bottom:.8mm;padding-bottom:.5mm}
+header h1{font-size:11pt;margin:0}
+header span{font-size:6.3pt;color:var(--mute)}
+section{margin:0 0 .8mm}
+h2{font-size:6.8pt;margin:1mm 0 .4mm;padding:.35mm 1mm;background:var(--ink);color:#fff;break-after:avoid;overflow:hidden}
+h2 .s{color:#ffd24d;float:right}
+h3{font-size:6.3pt;margin:.7mm 0 .2mm;color:var(--key);break-after:avoid}
+p{margin:.3mm 0}
+ul,ol{margin:.1mm 0 .4mm;padding-left:3mm}
+li{margin:.1mm 0}
 b,.k{color:var(--key)}
 .k{font-weight:700}
 mark{background:var(--hi);color:inherit;padding:0 .3mm}
 .imp{color:var(--red);font-weight:700}
-pre,code{font:4.7pt/1.07 Consolas,"Courier New",monospace}
-pre{background:var(--box);margin:.3mm 0;padding:.5mm .8mm;white-space:pre;overflow:hidden;break-inside:avoid;border-left:.8pt solid var(--key)}
+.def{background:var(--def);border-left:1.2pt solid var(--key);padding:.4mm 1mm;margin:.3mm 0;break-inside:avoid}
+.def b:first-child{color:var(--ink)}
+pre,code{font:5.3pt/1.12 Consolas,"Courier New",monospace}
+pre{background:var(--box);margin:.3mm 0;padding:.5mm .9mm;white-space:pre;overflow:hidden;break-inside:avoid;border-left:.8pt solid var(--line)}
 table{border-collapse:collapse;width:100%;margin:.3mm 0;break-inside:avoid}
-th,td{border:.3pt solid var(--line);padding:0 .5mm;text-align:center}
+th,td{border:.3pt solid var(--line);padding:.1mm .5mm;text-align:center}
+td.l,th.l{text-align:left}
 th{background:var(--box)}
-.gantt{display:flex;margin:.3mm 0 .1mm;break-inside:avoid}
-.gantt div{border:.4pt solid var(--ink);text-align:center;font-weight:700;background:#e8f0fb}
-.tl{display:flex;font-size:4.6pt;color:var(--mute);margin-bottom:.4mm}
-.tl span{text-align:left}
-.legend{column-span:all;font-size:5.4pt;margin-bottom:.6mm}
-.box{border:.4pt solid var(--ink);padding:.4mm .8mm;margin:.3mm 0;break-inside:avoid}
-.kw{font-size:5pt;color:var(--mute);font-style:italic}
+.gantt{display:flex;margin:.4mm 0 .1mm;break-inside:avoid}
+.gantt div{border:.4pt solid var(--ink);text-align:center;font-weight:700;background:#e3edfa}
+.tl{display:flex;font-size:5.4pt;color:var(--mute);margin-bottom:.4mm}
+.legend{column-span:all;font-size:6.1pt;margin-bottom:.6mm}
+.box{border:.5pt solid var(--ink);padding:.5mm 1mm;margin:.4mm 0;break-inside:avoid}
+.kw{font-size:5.9pt;color:var(--mute);font-style:italic}
+.ex{color:var(--mute)}
 </style>
 </head>
 <body>
 <div class="page">
-<header><h1>OPERATING SYSTEM — SESSIONAL 2 CHEAT SHEET</h1><span>Unit 2 (Priority → Hyper-Threading + RTOS case study) · Unit 3 (complete)</span></header>
-<div class="legend"><b>Priority:</b> ★★★★★ = sure-shot / numerical · ★★★★ = very likely · ★★★ = likely (short Q) · ★★ = MCQ/definition · ★ = read once &nbsp;|&nbsp; <b>Formulas:</b> <mark>TAT = CT − AT</mark> · <mark>WT = TAT − BT</mark> · <mark>RT = first-CPU − AT</mark> · Avg = Σ/n · <mark>Need = Max − Allocation</mark></div>
+<header><h1>OPERATING SYSTEM — SESSIONAL 2 CHEAT SHEET</h1><span>Unit 2: Priority Scheduling → Hyper-Threading + RTOS case study · Unit 3: Concurrency &amp; Deadlock (complete)</span></header>
+<div class="legend"><b>Importance:</b> ★★★★★ sure-shot / numerical · ★★★★ very likely long answer · ★★★ likely short answer · ★★ MCQ / one-liner · &nbsp;|&nbsp; <b>Formulas:</b> <mark>CT</mark> = completion time · <mark>TAT = CT − AT</mark> (total time in system) · <mark>WT = TAT − BT</mark> (time spent waiting in ready queue) · <mark>RT = time first got CPU − AT</mark> · Average = sum ÷ n · <mark>Need = Max − Allocation</mark></div>
 
-<!-- ============ UNIT 2 ============ -->
+<!-- ================= UNIT 2 ================= -->
 <section>
 <h2>1. PRIORITY SCHEDULING <span class="s">★★★★★</span></h2>
-<p>CPU given to process with <b>highest priority</b> (assume <mark>small number = high priority</mark> unless Q says otherwise). Tie → <b>FCFS</b> (earlier AT).</p>
+<div class="def"><b>Definition:</b> A CPU scheduling algorithm in which every process is given a <b>priority number</b>, and the CPU is always given to the process with the <b>highest priority</b>. If two processes have the same priority, the one that arrived first gets the CPU (FCFS).</div>
+<p>Usually <mark>smaller number = higher priority</mark> (P=1 is more important than P=5). Always read the question – sometimes it says the opposite.</p>
+<h3>Two types</h3>
 <ul>
-<li><span class="k">Non-preemptive:</span> once running, runs till completion; new high-priority job waits in ready queue at head.</li>
-<li><span class="k">Preemptive:</span> new arrival with higher priority <b>preempts</b> running process. Check at every arrival.</li>
-<li><span class="k">Starvation / Indefinite blocking:</span> low-priority process may wait forever.</li>
-<li><span class="k">Aging</span> (solution): gradually <b>increase priority</b> of waiting process (e.g. +1 every 15 min / factor 0.5 per day).</li>
-<li>Adv: important/system processes first. Disadv: starvation; equal priority needs another algo.</li>
+<li><span class="k">Non-preemptive priority:</span> once a process gets the CPU it runs till it <b>finishes</b>. If a higher-priority process arrives meanwhile, it only goes to the front of the ready queue and waits.</li>
+<li><span class="k">Preemptive priority:</span> if a newly arrived process has <b>higher priority than the running one, the running process is stopped (preempted)</b> and put back in the ready queue; the new one runs immediately. → Check priorities at <b>every arrival</b>.</li>
 </ul>
-<h3>Numerical (lower no. = higher priority)</h3>
-<table><tr><th>P</th><th>AT</th><th>BT</th><th>Pr</th></tr>
+<h3>Problem: Starvation &amp; its solution Aging</h3>
+<ul>
+<li><span class="k">Starvation (indefinite blocking):</span> if high-priority processes keep arriving, a low-priority process may <b>never get the CPU</b> – it is ready but waits forever.</li>
+<li><span class="k">Aging:</span> slowly <b>increase the priority</b> of a process the longer it waits (e.g. priority improves by 1 every 15 min). Eventually it becomes highest and runs → no starvation.</li>
+</ul>
+<p><b>Advantages:</b> important/system processes run first. <b>Disadvantages:</b> starvation; equal priorities need another rule (FCFS).</p>
+<h3>Numerical (lower number = higher priority)</h3>
+<table><tr><th>Process</th><th>AT</th><th>BT</th><th>Priority</th></tr>
 <tr><td>P1</td><td>0</td><td>4</td><td>3</td></tr><tr><td>P2</td><td>1</td><td>3</td><td>2</td></tr><tr><td>P3</td><td>2</td><td>1</td><td>4</td></tr><tr><td>P4</td><td>3</td><td>5</td><td>1</td></tr><tr><td>P5</td><td>4</td><td>2</td><td>2</td></tr></table>
-<p><b>(a) Non-preemptive</b> — at t=4 ready {P2,P3,P4,P5} → P4(1) → then P2 vs P5 (both 2, P2 earlier AT) → P5 → P3</p>
+<p><b>(a) Non-preemptive.</b> t=0 only P1 is present → P1 runs fully (0–4). At t=4 ready = P2(2), P3(4), P4(1), P5(2) → <b>P4</b> (priority 1). Then P2 &amp; P5 both have priority 2 → P2 (arrived earlier) → P5 → P3.</p>
 <div class="gantt"><div style="flex:4">P1</div><div style="flex:5">P4</div><div style="flex:3">P2</div><div style="flex:2">P5</div><div style="flex:1">P3</div></div>
-<div class="tl"><span style="flex:4">0</span><span style="flex:5">4</span><span style="flex:3">9</span><span style="flex:2">12</span><span style="flex:1">14 &nbsp;15</span></div>
-<table><tr><th>P</th><th>CT</th><th>TAT</th><th>WT</th><th>RT</th></tr>
+<div class="tl"><span style="flex:4">0</span><span style="flex:5">4</span><span style="flex:3">9</span><span style="flex:2">12</span><span style="flex:1">14 &nbsp;&nbsp;15</span></div>
+<table><tr><th>P</th><th>CT</th><th>TAT=CT−AT</th><th>WT=TAT−BT</th><th>RT</th></tr>
 <tr><td>P1</td><td>4</td><td>4</td><td>0</td><td>0</td></tr><tr><td>P2</td><td>12</td><td>11</td><td>8</td><td>8</td></tr><tr><td>P3</td><td>15</td><td>13</td><td>12</td><td>12</td></tr><tr><td>P4</td><td>9</td><td>6</td><td>1</td><td>1</td></tr><tr><td>P5</td><td>14</td><td>10</td><td>8</td><td>8</td></tr>
-<tr><th>Avg</th><th></th><th>8.8</th><th>5.8</th><th>5.8</th></tr></table>
-<p><b>(b) Preemptive</b> — t=1 P2 preempts P1; t=3 P4 preempts P2; after P4: P2(rem 1) → P5 → P1(rem 3) → P3</p>
+<tr><th>Avg</th><th></th><th>44/5 = 8.8</th><th>29/5 = 5.8</th><th>5.8</th></tr></table>
+<p><b>(b) Preemptive.</b> t=0 P1 starts. t=1 P2(2) arrives, better than P1(3) → <b>P1 preempted</b> (rem 3). t=2 P3(4) worse → P2 continues. t=3 P4(1) arrives → <b>P2 preempted</b> (rem 1). P4 runs 3–8. Then P2(rem 1) 8–9, P5 9–11, P1(rem 3) 11–14, P3 14–15.</p>
 <div class="gantt"><div style="flex:1">P1</div><div style="flex:2">P2</div><div style="flex:5">P4</div><div style="flex:1">P2</div><div style="flex:2">P5</div><div style="flex:3">P1</div><div style="flex:1">P3</div></div>
-<div class="tl"><span style="flex:1">0</span><span style="flex:2">1</span><span style="flex:5">3</span><span style="flex:1">8</span><span style="flex:2">9</span><span style="flex:3">11</span><span style="flex:1">14 15</span></div>
+<div class="tl"><span style="flex:1">0</span><span style="flex:2">1</span><span style="flex:5">3</span><span style="flex:1">8</span><span style="flex:2">9</span><span style="flex:3">11</span><span style="flex:1">14 &nbsp;15</span></div>
 <table><tr><th>P</th><th>CT</th><th>TAT</th><th>WT</th><th>RT</th></tr>
 <tr><td>P1</td><td>14</td><td>14</td><td>10</td><td>0</td></tr><tr><td>P2</td><td>9</td><td>8</td><td>5</td><td>0</td></tr><tr><td>P3</td><td>15</td><td>13</td><td>12</td><td>12</td></tr><tr><td>P4</td><td>8</td><td>5</td><td>0</td><td>0</td></tr><tr><td>P5</td><td>11</td><td>7</td><td>5</td><td>5</td></tr>
 <tr><th>Avg</th><th></th><th>9.4</th><th>6.4</th><th>3.4</th></tr></table>
-<p class="kw">Keywords: preemption, starvation, aging, indefinite blocking, static vs dynamic priority</p>
+<p class="kw">Keywords: priority number, preemption, starvation, indefinite blocking, aging, static vs dynamic priority</p>
 </section>
 
 <section>
 <h2>2. ROUND ROBIN (RR) <span class="s">★★★★★</span></h2>
-<p>FCFS + <b>preemption</b> using fixed <span class="k">time quantum (q)</span>; designed for <b>time-sharing</b>. Ready queue is <b>circular FIFO</b>.</p>
+<div class="def"><b>Definition:</b> A <b>preemptive</b> scheduling algorithm designed for <b>time-sharing systems</b>. Each process gets the CPU for a small fixed time called the <b>time quantum (time slice, q)</b>. If it doesn't finish within q, it is preempted and sent to the <b>back of the ready queue</b>, and the next process runs. It is basically <b>FCFS + preemption</b>.</div>
+<h3>How to solve RR numericals (step by step)</h3>
+<ol>
+<li>Put the process that arrives first in the ready queue (FIFO).</li>
+<li>Take the front process, run it for <b>min(q, remaining burst)</b>.</li>
+<li><span class="imp">Golden rule:</span> first add all processes that <b>arrived during</b> that slice to the queue, <b>then</b> add the preempted process at the back.</li>
+<li>If a process finishes, note its CT. Repeat till queue is empty.</li>
+</ol>
 <ul>
-<li>Process runs min(q, remaining); if unfinished → goes to <b>tail</b> of queue.</li>
-<li><span class="imp">Rule:</span> processes that <b>arrive during</b> a slice enter queue <b>before</b> the preempted process.</li>
-<li>q very large → behaves like <b>FCFS</b>; q very small → too many <b>context switches</b> (overhead).</li>
-<li>Max wait for a process ≤ (n−1)·q. Good <b>response time</b>.</li>
-<li>Adv: <b>no starvation</b>, fair. Disadv: high context-switch overhead, avg WT often higher than SJF.</li>
+<li>q <b>too large</b> → RR becomes FCFS. q <b>too small</b> → too many <b>context switches</b> (CPU wastes time switching).</li>
+<li><b>Advantages:</b> fair, <b>no starvation</b> (every process gets turn), good response time. <b>Disadvantages:</b> lots of context switching; average waiting time often higher than SJF.</li>
 </ul>
-<h3>Numerical (q = 2)</h3>
-<table><tr><th>P</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th></tr><tr><th>AT</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr><tr><th>BT</th><td>5</td><td>3</td><td>1</td><td>2</td><td>3</td></tr></table>
-<p>Queue trace: [P1] → t2: P2,P3,P1 → t4: P3,P1,P4,P5,P2 → t5: P1,P4,P5,P2 → t7: P4,P5,P2,P1 → t9: P5,P2,P1 → t11: P2,P1,P5 → t12: P1,P5 → t13: P5</p>
+<h3>Numerical (time quantum q = 2)</h3>
+<table><tr><th>Process</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th></tr><tr><th>AT</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr><tr><th>BT</th><td>5</td><td>3</td><td>1</td><td>2</td><td>3</td></tr></table>
+<table><tr><th>Time</th><th class="l">What happens → ready queue after</th></tr>
+<tr><td>0–2</td><td class="l">P1 runs (rem 3). P2, P3 arrived → queue: P2, P3, P1</td></tr>
+<tr><td>2–4</td><td class="l">P2 runs (rem 1). P4, P5 arrived → P3, P1, P4, P5, P2</td></tr>
+<tr><td>4–5</td><td class="l">P3 runs 1 → <b>done CT=5</b> → P1, P4, P5, P2</td></tr>
+<tr><td>5–7</td><td class="l">P1 runs (rem 1) → P4, P5, P2, P1</td></tr>
+<tr><td>7–9</td><td class="l">P4 runs 2 → <b>done CT=9</b> → P5, P2, P1</td></tr>
+<tr><td>9–11</td><td class="l">P5 runs (rem 1) → P2, P1, P5</td></tr>
+<tr><td>11–14</td><td class="l">P2 done 12, P1 done 13, P5 done 14</td></tr></table>
 <div class="gantt"><div style="flex:2">P1</div><div style="flex:2">P2</div><div style="flex:1">P3</div><div style="flex:2">P1</div><div style="flex:2">P4</div><div style="flex:2">P5</div><div style="flex:1">P2</div><div style="flex:1">P1</div><div style="flex:1">P5</div></div>
 <div class="tl"><span style="flex:2">0</span><span style="flex:2">2</span><span style="flex:1">4</span><span style="flex:2">5</span><span style="flex:2">7</span><span style="flex:2">9</span><span style="flex:1">11</span><span style="flex:1">12</span><span style="flex:1">13 14</span></div>
 <table><tr><th>P</th><th>CT</th><th>TAT</th><th>WT</th><th>RT</th></tr>
 <tr><td>P1</td><td>13</td><td>13</td><td>8</td><td>0</td></tr><tr><td>P2</td><td>12</td><td>11</td><td>8</td><td>1</td></tr><tr><td>P3</td><td>5</td><td>3</td><td>2</td><td>2</td></tr><tr><td>P4</td><td>9</td><td>6</td><td>4</td><td>4</td></tr><tr><td>P5</td><td>14</td><td>10</td><td>7</td><td>5</td></tr>
-<tr><th>Avg</th><th></th><th>8.6</th><th>5.8</th><th>2.4</th></tr></table>
-<p class="kw">Keywords: time quantum/slice, circular queue, context switch, time-sharing, fairness, response time</p>
+<tr><th>Avg</th><th></th><th>43/5 = 8.6</th><th>29/5 = 5.8</th><th>2.4</th></tr></table>
+<p class="kw">Keywords: time quantum / time slice, circular FIFO queue, preemption, context switch, time-sharing, fairness</p>
 </section>
 
 <section>
 <h2>3. MULTILEVEL QUEUE (MLQ) <span class="s">★★★</span></h2>
+<div class="def"><b>Definition:</b> The ready queue is divided into <b>several separate queues</b>, each for one type of process (system, interactive, batch…). A process is <b>permanently assigned</b> to one queue when it enters and <b>never moves</b> to another queue. Each queue has its <b>own scheduling algorithm</b>.</div>
 <ul>
-<li>Ready queue split into <b>separate queues</b>: foreground (interactive) → <b>RR</b>; background (batch) → <b>FCFS</b>.</li>
-<li>Process <b>permanently assigned</b> to a queue — <b>no movement</b> between queues.</li>
-<li>Between queues: <b>fixed priority</b> (starvation possible) or <b>time slice</b> (e.g. 80% fg / 20% bg).</li>
-<li>Order: System → Interactive → Interactive editing → Batch → Student processes.</li>
+<li>Example: <b>foreground</b> (interactive) queue uses <b>RR</b>; <b>background</b> (batch) queue uses <b>FCFS</b>.</li>
+<li>Scheduling <b>between</b> queues: (i) <b>fixed priority</b> – serve foreground fully first, then background → background may <b>starve</b>; or (ii) <b>time slice</b> – e.g. 80% CPU to foreground, 20% to background.</li>
+<li>Typical order (high→low): System → Interactive → Interactive editing → Batch → Student processes.</li>
 </ul>
 <h2>4. MULTILEVEL FEEDBACK QUEUE (MLFQ) <span class="s">★★★★</span></h2>
-<ul>
-<li>Processes <b>can move</b> between queues → uses <b>aging</b> to prevent starvation.</li>
-<li>Parameters: no. of queues, algo per queue, when to <b>upgrade</b>, when to <b>demote</b>, which queue a new process enters.</li>
-<li><b>Example:</b> Q0 RR q=8 → Q1 RR q=16 → Q2 FCFS. New job enters Q0; not finished in 8 ms → demoted to Q1; not finished in 16 more → Q2.</li>
-<li>Adv: most flexible, low response time, prevents starvation. Disadv: <b>complex</b>, CPU overhead, tuning parameters.</li>
-</ul>
-<table><tr><th>Algo</th><th>Preemptive?</th><th>Starvation</th><th>Basis</th></tr>
-<tr><td>FCFS</td><td>No</td><td>No (convoy)</td><td>AT</td></tr><tr><td>SJF</td><td>No</td><td>Yes</td><td>BT</td></tr><tr><td>SRTF</td><td>Yes</td><td>Yes</td><td>rem. BT</td></tr><tr><td>Priority</td><td>Both</td><td>Yes→aging</td><td>Priority</td></tr><tr><td>RR</td><td>Yes</td><td>No</td><td>Quantum</td></tr><tr><td>MLQ</td><td>Both</td><td>Yes</td><td>Fixed queue</td></tr><tr><td>MLFQ</td><td>Yes</td><td>No (aging)</td><td>Feedback</td></tr></table>
+<div class="def"><b>Definition:</b> Like multilevel queue, but processes <b>can move between queues</b> based on their behaviour. A process that uses too much CPU is moved <b>down</b> to a lower-priority queue; a process that waits too long in a low queue is moved <b>up</b> (this is <b>aging</b>, prevents starvation).</div>
+<p><b>Defined by:</b> number of queues · algorithm of each queue · when to <b>upgrade</b> · when to <b>demote</b> · which queue a new process enters.</p>
+<p><b>Example:</b> Q0 = RR (q=8 ms), Q1 = RR (q=16 ms), Q2 = FCFS. A new job enters Q0 and gets 8 ms. If not finished → moved to Q1 and gets 16 more ms. Still not finished → moved to Q2 (FCFS). So short jobs finish fast in Q0; long CPU-bound jobs sink to the bottom.</p>
+<p><b>Advantages:</b> most flexible, low response time, prevents starvation. <b>Disadvantages:</b> most <b>complex</b>, extra CPU overhead, hard to choose the parameters.</p>
+<table><tr><th>Algorithm</th><th>Preemptive?</th><th>Starvation?</th><th>Selects by</th></tr>
+<tr><td>FCFS</td><td>No</td><td>No (convoy effect)</td><td>Arrival time</td></tr><tr><td>SJF</td><td>No</td><td>Yes</td><td>Burst time</td></tr><tr><td>SRTF</td><td>Yes</td><td>Yes</td><td>Remaining BT</td></tr><tr><td>Priority</td><td>Both</td><td>Yes → aging</td><td>Priority no.</td></tr><tr><td>Round Robin</td><td>Yes</td><td>No</td><td>Time quantum</td></tr><tr><td>MLQ</td><td>Both</td><td>Yes</td><td>Fixed queue</td></tr><tr><td>MLFQ</td><td>Yes</td><td>No (aging)</td><td>Feedback</td></tr></table>
 </section>
 
 <section>
 <h2>5. PROCESS vs THREAD <span class="s">★★★★</span></h2>
-<p><span class="k">Thread</span> = basic unit of CPU utilization = <b>lightweight process</b>; has own <b>PC, stack, registers, thread ID</b>; shares <b>code, data, files, heap</b> (memory) of its process.</p>
+<div class="def"><b>Process:</b> a program in execution, with its <b>own</b> memory (code, data, heap, stack), files and PCB.<br><b>Thread:</b> the <b>basic unit of CPU utilization</b> – a single path of execution <b>inside</b> a process. Called a <b>lightweight process</b>. Each thread has its <b>own</b> thread ID, program counter, register set and stack, but <b>shares</b> the code, data, heap and open files of its process with other threads.</div>
 <table><tr><th>Process</th><th>Thread</th></tr>
-<tr><td>Heavyweight, own address space</td><td>Lightweight, shares address space</td></tr>
-<tr><td>Creation/switch costly</td><td>Cheap create & switch</td></tr>
-<tr><td>IPC needed to communicate</td><td>Communicate via shared memory</td></tr>
-<tr><td>Isolated – one crash ≠ others</td><td>One thread fault can kill process</td></tr>
-<tr><td>Own PCB</td><td>TCB inside process</td></tr></table>
+<tr><td>Heavyweight; own address space</td><td>Lightweight; shares process's address space</td></tr>
+<tr><td>Creation &amp; context switch are slow/costly</td><td>Creation &amp; switch are fast/cheap</td></tr>
+<tr><td>Needs IPC to talk to other processes</td><td>Talks through shared memory directly</td></tr>
+<tr><td>Independent – one crashing doesn't affect others</td><td>One faulty thread can crash whole process</td></tr>
+<tr><td>Has its own PCB</td><td>Has a TCB inside the process</td></tr></table>
 <h3>Thread States <span class="s">★★</span></h3>
-<p><b>New</b> (created, not started) → <b>Runnable/Ready</b> → <b>Running</b> → <b>Blocked/Waiting/Timed-waiting</b> (I/O, lock, sleep, join) → back to Runnable → <b>Terminated/Dead</b> (cannot restart).</p>
-<h3>Benefits of Threads <span class="s">★★★</span> — "RRES"</h3>
-<ul><li><b>Responsiveness</b> – UI continues if part blocked</li><li><b>Resource sharing</b> – share memory by default</li><li><b>Economy</b> – cheaper create/switch than process</li><li><b>Scalability</b> – use multiprocessor/multicore</li></ul>
+<ul>
+<li><b>New</b> – thread created but not yet started (<code>new Thread()</code>).</li>
+<li><b>Runnable / Ready</b> – ready to run, waiting for CPU.</li>
+<li><b>Running</b> – currently executing on CPU.</li>
+<li><b>Blocked / Waiting / Timed-waiting</b> – waiting for I/O, a lock, sleep() or join(); returns to Runnable when event occurs.</li>
+<li><b>Terminated / Dead</b> – finished or crashed; <b>cannot be restarted</b>.</li>
+</ul>
+<h3>Benefits of Multithreading <span class="s">★★★</span> (remember "RRES")</h3>
+<ul>
+<li><b>Responsiveness</b> – if one thread blocks (e.g. downloading), others keep the app responsive (UI doesn't freeze).</li>
+<li><b>Resource sharing</b> – threads share memory &amp; resources of the process automatically; no IPC needed.</li>
+<li><b>Economy</b> – creating/switching threads is much cheaper than processes.</li>
+<li><b>Scalability</b> – threads can run in parallel on multiple cores.</li>
+</ul>
 </section>
 
 <section>
 <h2>6. TYPES OF THREADS <span class="s">★★★</span></h2>
-<table><tr><th>User-Level (ULT)</th><th>Kernel-Level (KLT)</th></tr>
-<tr><td>Managed by user thread <b>library</b></td><td>Managed by <b>OS kernel</b></td></tr>
-<tr><td>Fast, no kernel intervention</td><td>Slower to create</td></tr>
-<tr><td><span class="imp">One blocks → all block</span></td><td>One blocks → others run</td></tr>
-<tr><td>No true parallelism on multicore</td><td>Scheduled on different CPUs</td></tr>
-<tr><td>POSIX Pthreads, Mach C-threads, Solaris threads</td><td>Windows NT/2000, Linux, Solaris, Tru64</td></tr></table>
+<div class="def"><b>User-Level Thread (ULT):</b> created and managed by a <b>thread library in user space</b>; the kernel doesn't even know they exist.<br><b>Kernel-Level Thread (KLT):</b> created and managed <b>directly by the OS kernel</b>; kernel schedules each thread.</div>
+<table><tr><th>User-Level Thread</th><th>Kernel-Level Thread</th></tr>
+<tr><td>Fast to create/switch, no system call</td><td>Slower (needs kernel involvement)</td></tr>
+<tr><td><span class="imp">If one thread blocks, whole process blocks</span></td><td>If one blocks, others continue</td></tr>
+<tr><td>Can't use multiple CPUs in parallel</td><td>Can run on different CPUs</td></tr>
+<tr><td>Ex: POSIX Pthreads, Mach C-threads, Solaris threads</td><td>Ex: Windows NT/2000, Linux, Solaris, Tru64</td></tr></table>
 <h2>7. MULTITHREADING MODELS <span class="s">★★★★</span></h2>
+<p>Describe <b>how user threads are mapped to kernel threads</b>.</p>
 <ul>
-<li><span class="k">Many-to-One:</span> many ULT → 1 KLT. One blocking call blocks all; no parallelism. Ex: Solaris Green Threads, GNU Portable Threads.</li>
-<li><span class="k">One-to-One:</span> each ULT → own KLT. More concurrency, parallel on multicore; overhead of creating KLT. Ex: Windows, Linux, OS/2.</li>
-<li><span class="k">Many-to-Many:</span> m ULT → ≤ m KLT (dynamic mapping). Best of both: many threads + parallelism, no all-block. Ex: Solaris (pre-9), Windows ThreadFiber.</li>
+<li><span class="k">Many-to-One:</span> many user threads → <b>one</b> kernel thread. Thread management is fast, but if one thread makes a blocking call <b>all block</b>, and threads <b>can't run in parallel</b> on multicore. Ex: Solaris Green Threads, GNU Portable Threads.</li>
+<li><span class="k">One-to-One:</span> <b>each</b> user thread → its <b>own</b> kernel thread. More concurrency, true parallelism, one blocking doesn't stop others. Drawback: creating a user thread needs a kernel thread (overhead), so number of threads is limited. Ex: Windows, Linux, OS/2.</li>
+<li><span class="k">Many-to-Many:</span> many user threads → a <b>smaller or equal number</b> of kernel threads (mapped dynamically). Best of both: create as many threads as needed, they run in parallel, a blocking call doesn't block all. Ex: older Solaris, Windows ThreadFiber.</li>
 </ul>
 <h2>8. HYPER-THREADING (HT) <span class="s">★★★</span></h2>
+<div class="def"><b>Definition:</b> Intel's technology (a form of <b>Simultaneous Multithreading – SMT</b>) that makes <b>one physical CPU core appear as two logical processors</b> to the OS, so the core can execute instructions of <b>two threads at the same time</b>.</div>
 <ul>
-<li>Intel technology; a form of <span class="k">SMT (Simultaneous Multithreading)</span>.</li>
-<li>1 <b>physical core</b> appears as <b>2 logical processors</b> to OS.</li>
-<li>Each logical CPU has own <b>architectural state (registers)</b>; shares <b>execution units, cache</b>.</li>
-<li>When one thread <b>stalls</b> (cache miss/memory wait), other uses idle execution units.</li>
-<li>Benefits: ↑ throughput, better resource utilization, cheap parallelism. Best for mixed compute + memory/I-O workloads. <b>Not</b> 2× speed.</li>
+<li><b>Why?</b> A core has many execution units (integer, floating-point, load/store). One thread alone leaves many of them idle (waiting for memory, cache miss).</li>
+<li><b>How?</b> Each logical processor has its own <b>architectural state (registers)</b>, but both <b>share</b> execution units and cache. When thread 1 stalls, thread 2 uses the idle units.</li>
+<li><b>Benefits:</b> higher throughput, better utilization, parallelism without adding extra cores (cheap). Gives ~15–30% gain, <b>not 2×</b>.</li>
 </ul>
-<h2>9. CASE STUDY: RTOS SCHEDULING <span class="s">★★</span></h2>
+<h2>9. CASE STUDY: CPU SCHEDULING IN RTOS <span class="s">★★</span></h2>
+<div class="def"><b>Real-Time Operating System (RTOS):</b> an OS where a task's result must be produced <b>within a strict deadline</b>; correctness depends on <b>time</b> as well as result. Key traits: <b>determinism, predictability, low latency</b>. Ex: FreeRTOS, VxWorks, QNX, RT-Linux, Zephyr.</div>
 <ul>
-<li><b>Hard RT</b> (missed deadline = failure: ABS, pacemaker) vs <b>Soft RT</b> (degraded quality: video streaming).</li>
-<li>RTOS traits: <b>determinism, predictability, low latency</b>; preemptive priority-based. Ex: FreeRTOS, VxWorks, QNX, RT-Linux, Zephyr.</li>
-<li><span class="k">RMS</span> (Rate Monotonic): static, shorter <b>period</b> = higher priority. Test: <mark>U = ΣCi/Pi ≤ n(2<sup>1/n</sup>−1)</mark> (n=2 → 0.828).</li>
-<li><span class="k">EDF</span>: dynamic, earliest <b>absolute deadline</b> first; optimal, schedulable if <mark>U ≤ 1</mark>.</li>
-<li><span class="k">DMS</span>: static, shorter <b>relative deadline</b> = higher priority.</li>
-<li><span class="k">Priority inversion</span>: high task blocked by low task holding resource → fix with <b>Priority Inheritance (PIP)</b> / <b>Priority Ceiling (PCP)</b>. Also: <b>WCET, jitter, tick rate</b>.</li>
+<li><b>Hard real-time:</b> missing a deadline = system failure (airbag, ABS, pacemaker). <b>Soft real-time:</b> missing a deadline only reduces quality (video streaming).</li>
+<li><span class="k">Rate Monotonic (RMS):</span> static priority; task with <b>shorter period</b> gets higher priority. Schedulable if <mark>U = Σ(Ci/Pi) ≤ n(2<sup>1/n</sup> − 1)</mark> (n=2 → 0.828).</li>
+<li><span class="k">Earliest Deadline First (EDF):</span> dynamic priority; task whose <b>deadline is nearest</b> runs first. Optimal; schedulable if <mark>U ≤ 1</mark>.</li>
+<li><span class="k">Deadline Monotonic (DMS):</span> static; <b>shorter relative deadline</b> = higher priority.</li>
+<li><span class="k">Priority inversion:</span> a high-priority task waits because a low-priority task holds a resource it needs. Fix: <b>Priority Inheritance</b> (low task temporarily gets the high priority) or <b>Priority Ceiling</b>.</li>
+<li>Terms: <b>WCET</b> (worst-case execution time), <b>jitter</b> (variation in timing), <b>tick rate</b>.</li>
 </ul>
 </section>
 
-<!-- ============ UNIT 3 ============ -->
+<!-- ================= UNIT 3 ================= -->
 <section>
-<h2>10. CONCURRENCY & RACE CONDITION <span class="s">★★★★</span></h2>
-<ul>
-<li><span class="k">Concurrency:</span> multiple processes/threads in <b>overlapping time</b> (interleaving is enough, not necessarily simultaneous). Types: process-level, thread-level, distributed.</li>
-<li><span class="k">Race condition:</span> several processes access & manipulate <b>shared data</b> concurrently and result <b>depends on order</b> of execution.</li>
-<li><code>counter++</code> = reg=counter; reg=reg+1; counter=reg → interleaving with counter-- gives 4 or 6 instead of 5.</li>
-<li>Effects: data inconsistency, non-deterministic bugs. Prevent: mutex/locks, semaphores, atomic ops.</li>
-</ul>
-<h2>11. CRITICAL SECTION (CS) PROBLEM <span class="s">★★★★★</span></h2>
-<p><b>CS</b> = code segment accessing shared resources. Structure: <code>do{ <b>entry section</b>; CS; <b>exit section</b>; remainder section } while(1);</code></p>
-<div class="box"><b>3 Requirements (MPB):</b><br>
-<b>1. Mutual Exclusion</b> – only one process in CS at a time.<br>
-<b>2. Progress</b> – if CS empty, only processes not in remainder decide who enters next; decision can't be postponed indefinitely.<br>
-<b>3. Bounded Waiting</b> – limit on how many times others enter CS after a process requests (no starvation).</div>
+<h2>10. CONCURRENCY &amp; RACE CONDITION <span class="s">★★★★</span></h2>
+<div class="def"><b>Concurrency:</b> running multiple processes/threads in <b>overlapping time periods</b>. They need not run at the exact same instant – the OS can <b>interleave</b> them on one CPU. Types: process-level, thread-level, distributed.</div>
+<div class="def"><b>Race Condition:</b> a situation where two or more processes access and change <b>shared data at the same time</b>, and the <b>final result depends on the order</b> in which they happen to execute. Different timings give different (wrong) answers.</div>
+<p><b>Example:</b> counter = 5. P1 does <code>counter++</code>, P2 does <code>counter--</code>. In machine code each is 3 steps: <code>reg = counter; reg = reg ± 1; counter = reg</code>. If they interleave (P1 reads 5, P2 reads 5, P1 writes 6, P2 writes 4), the final value is <b>4 or 6 instead of 5</b>.</p>
+<p><b>Effects:</b> data inconsistency, unpredictable, hard-to-debug results. <b>Prevention:</b> allow only one process at a time in the shared code → locks, mutex, semaphores, atomic instructions.</p>
+
+<h2>11. CRITICAL SECTION PROBLEM <span class="s">★★★★★</span></h2>
+<div class="def"><b>Critical Section (CS):</b> the part of a program where a process <b>accesses shared resources</b> (shared variables, files, tables). The <b>critical section problem</b> is to design a protocol so that <b>no two processes are in their critical sections at the same time</b>.</div>
+<pre>do {
+   entry section      // ask permission to enter
+      critical section
+   exit section       // announce leaving
+      remainder section
+} while (true);</pre>
+<div class="box"><b>Any correct solution must satisfy 3 conditions:</b><br>
+<b>1. Mutual Exclusion</b> – if one process is executing in its CS, <b>no other</b> process can be in its CS.<br>
+<b>2. Progress</b> – if no process is in the CS and some want to enter, the choice of who enters next cannot be postponed forever, and only processes that want to enter take part in the decision (a process in its remainder section cannot block others).<br>
+<b>3. Bounded Waiting</b> – after a process requests entry, there is a <b>limit</b> on how many times other processes can enter before it. (→ no starvation)</div>
 </section>
 
 <section>
-<h2>12. IPC (Inter-Process Communication) <span class="s">★★★</span></h2>
-<p>Needed by <b>cooperating processes</b> (info sharing, speedup, modularity, convenience). Two models:</p>
+<h2>12. INTER-PROCESS COMMUNICATION (IPC) <span class="s">★★★</span></h2>
+<div class="def"><b>IPC:</b> mechanism that lets <b>cooperating processes</b> (processes that affect each other) <b>exchange data and synchronize</b>. Needed for information sharing, speed-up, modularity, convenience. Two models:</div>
 <table><tr><th>Shared Memory</th><th>Message Passing</th></tr>
-<tr><td>Region of memory shared</td><td>send(msg)/receive(msg)</td></tr>
-<tr><td><b>Faster</b> (kernel only at setup)</td><td>Slower (system call each msg)</td></tr>
-<tr><td>Large data</td><td>Small data, distributed systems</td></tr>
-<tr><td>Programmer handles sync</td><td>Easier, OS handles</td></tr></table>
-<ul><li><b>Direct:</b> send(P,msg), receive(Q,msg) – explicit naming, link per pair.</li>
-<li><b>Indirect:</b> via <b>mailbox/port</b>: send(A,msg), receive(A,msg) – link shared by many.</li></ul>
+<tr><td>A common memory region is created; processes read/write it</td><td>Processes exchange messages using <code>send()</code> / <code>receive()</code></td></tr>
+<tr><td><b>Faster</b> – kernel needed only to set it up</td><td>Slower – every message is a system call</td></tr>
+<tr><td>Good for large data</td><td>Good for small data &amp; distributed systems</td></tr>
+<tr><td>Programmer must handle synchronization</td><td>Easier; OS handles it</td></tr></table>
+<ul><li><b>Direct communication:</b> name the other process explicitly – <code>send(P, msg)</code>, <code>receive(Q, msg)</code>; one link between each pair.</li>
+<li><b>Indirect communication:</b> messages go through a <b>mailbox (port)</b> – <code>send(A, msg)</code>, <code>receive(A, msg)</code>; many processes can share a mailbox.</li></ul>
 </section>
 
 <section>
 <h2>13. LOCK VARIABLE <span class="s">★★★★★</span></h2>
-<p>Simplest <b>software</b>, busy-wait mechanism. Shared <code>int lock=0</code> (0 = free, 1 = busy). Works for <b>n</b> processes, user mode.</p>
-<pre>int lock = 0;            // shared
-while(1){
-  while(lock == 1);      // entry: busy wait
-  lock = 1;              // acquire
-  /* Critical Section */
-  lock = 0;              // exit: release
-  /* Remainder */ }</pre>
-<p class="imp">✗ Fails Mutual Exclusion!</p>
-<p>P1 reads lock=0 → preempted before setting 1 → P2 reads 0, sets 1, enters CS → P1 resumes, sets 1, also enters CS. Reason: <b>test & set are 2 separate (non-atomic) steps</b>. Also busy waiting. ✓ Progress ✗ Bounded waiting. Fix → <b>Test-and-Set</b>, mutex, semaphore.</p>
-<h3>Strict Alternation (turn variable) <span class="s">★★★</span></h3>
-<pre>int turn=0;
-P0: while(turn!=0); CS; turn=1;
-P1: while(turn!=1); CS; turn=0;</pre>
-<p>✓ ME ✗ <b>Progress</b> (P0 can't re-enter if P1 not interested) – strict P0,P1,P0… only 2 processes, busy wait.</p>
+<div class="def"><b>Definition:</b> the simplest <b>software</b> synchronization method. A shared integer <code>lock</code> is used: <b>0 = CS is free</b>, <b>1 = CS is busy</b>. A process waits while lock is 1, sets it to 1 when it enters, and resets to 0 when it leaves. Works in user mode for any number of processes.</div>
+<pre>int lock = 0;          // shared by all
+while (1) {
+   while (lock == 1);  // entry: busy wait
+   lock = 1;           // take the lock
+   /* Critical Section */
+   lock = 0;           // exit: release
+   /* Remainder Section */
+}</pre>
+<p class="imp">✗ It does NOT guarantee Mutual Exclusion!</p>
+<p><b>Why it fails:</b> P1 checks lock → finds 0 → <b>gets preempted before writing lock = 1</b>. P2 now checks lock → also 0 → sets 1 → enters CS. P1 resumes, sets lock = 1, and also enters CS → <b>both in CS</b>. Reason: <b>checking and setting the lock are two separate steps, not atomic</b>.</p>
+<p>Other drawbacks: <b>busy waiting</b> (waiting process keeps looping and wastes CPU), no bounded waiting. ✓ Progress is satisfied. <b>Fix:</b> make check+set atomic → Test-and-Set instruction, mutex lock, semaphore.</p>
 <h3>Mutex Lock</h3>
-<p><code>acquire(){ while(!available); available=false; }</code> <code>release(){ available=true; }</code> – must be atomic; busy-waiting version = <b>spinlock</b>.</p>
+<p>A lock with two <b>atomic</b> operations: <code>acquire(){ while(!available); available = false; }</code> and <code>release(){ available = true; }</code>. A mutex that busy-waits is called a <b>spinlock</b>. Example: only one ATM can update a bank balance at a time.</p>
+<h3>Strict Alternation (turn variable) <span class="s">★★★</span></h3>
+<p>Shared <code>int turn = 0;</code> – processes take turns strictly: P0, P1, P0, P1…</p>
+<pre>P0: while(turn != 0); /*CS*/ turn = 1;
+P1: while(turn != 1); /*CS*/ turn = 0;</pre>
+<p>✓ Mutual exclusion. ✗ <b>Progress fails</b>: if it's P1's turn but P1 doesn't want to enter, P0 can't enter again even though CS is empty. Only 2 processes; busy waiting.</p>
 </section>
 
 <section>
 <h2>14. PETERSON'S SOLUTION <span class="s">★★★★</span></h2>
-<p>Software solution for <b>2 processes</b>; shared <code>int turn; bool flag[2];</code></p>
-<pre>// Process Pi (j = 1-i)
-do{ flag[i]=true;  turn=j;
-    while(flag[j] && turn==j);  // wait
-    /* CS */
-    flag[i]=false;
-    /* remainder */ } while(1);</pre>
-<p>✓ ME ✓ Progress ✓ Bounded waiting. ✗ only 2 processes, busy waiting, may fail on modern CPUs (instruction reordering).</p>
+<div class="def"><b>Definition:</b> a classic <b>software solution for 2 processes</b> that satisfies all 3 CS conditions. Uses two shared variables: <code>flag[2]</code> – flag[i]=true means "Pi <b>wants</b> to enter"; and <code>turn</code> – whose <b>turn</b> it is if both want.</div>
+<pre>// process Pi (other process is j)
+do {
+   flag[i] = true;   // I want to enter
+   turn = j;         // let other go first
+   while (flag[j] &amp;&amp; turn == j);
+         // wait while other wants &amp; it's his turn
+   /* Critical Section */
+   flag[i] = false;  // I'm done
+   /* Remainder Section */
+} while (true);</pre>
+<p><b>Why it works:</b> if both want to enter, <code>turn</code> can hold only one value, so only one passes the while loop. ✓ Mutual Exclusion ✓ Progress ✓ Bounded Waiting.<br><b>Drawbacks:</b> only 2 processes, busy waiting, may fail on modern CPUs that reorder instructions.</p>
 <h3>Bakery Algorithm (Lamport) <span class="s">★★</span></h3>
-<p>For <b>n</b> processes. Take ticket <code>number[i]=max(number)+1</code>; lowest ticket enters; tie → lower PID: <code>(a,i)&lt;(b,j)</code>. Uses <code>choosing[]</code>, <code>number[]</code>. FCFS, no special hardware; busy wait.</p>
-<h3>Test-and-Set (TSL) – Hardware <span class="s">★★★</span></h3>
-<pre>bool TestAndSet(bool *t){   // ATOMIC
-  bool rv=*t; *t=true; return rv; }
-do{ while(TestAndSet(&amp;lock)); // spin
-    /* CS */  lock=false; }while(1);</pre>
-<p>Check + set in <b>one indivisible instruction</b> → ✓ ME. ✗ busy wait (spinlock), ✗ bounded waiting not guaranteed.</p>
+<p>Solution for <b>n processes</b>, like taking a token at a bakery: each process wanting CS takes a number <code>number[i] = max(number[]) + 1</code>; the <b>smallest number enters first</b>; if two have the same number, the <b>smaller process ID</b> goes first. Uses <code>choosing[]</code> and <code>number[]</code>. FCFS order, no special hardware, but busy waiting.</p>
+<h3>Test-and-Set (TSL) – Hardware solution <span class="s">★★★</span></h3>
+<p>A special CPU instruction that <b>reads the old value of lock and sets it to true in one indivisible (atomic) step</b> – so no other process can sneak in between (fixes the lock-variable problem).</p>
+<pre>bool TestAndSet(bool *target) { // ATOMIC
+   bool rv = *target;
+   *target = true;  return rv; }
+do { while (TestAndSet(&amp;lock)); // spin
+     /* CS */   lock = false;
+     /* remainder */ } while(1);</pre>
+<p>✓ Mutual exclusion. ✗ busy waiting (spinlock), ✗ bounded waiting not guaranteed.</p>
 </section>
 
 <section>
 <h2>15. SEMAPHORES <span class="s">★★★★</span></h2>
-<p>Integer <b>S</b> accessed only via 2 <b>atomic</b> ops (Dijkstra):</p>
-<pre>wait(S)   /P/down: while(S&lt;=0); S--;
-signal(S) /V/up:   S++;</pre>
+<div class="def"><b>Definition (Dijkstra):</b> a semaphore <b>S</b> is an <b>integer variable</b> that, apart from initialization, is accessed only through two <b>atomic</b> operations: <b>wait()</b> (also P / down) and <b>signal()</b> (also V / up).</div>
+<pre>wait(S)   { while (S &lt;= 0);  S--; } // take
+signal(S) { S++; }                  // release</pre>
 <ul>
-<li><span class="k">Binary</span> (0/1) ≈ mutex lock. <span class="k">Counting</span> (any int) – for resources with n instances.</li>
-<li>Ordering: S1 before S2 → <code>synch=0</code>; P1: S1; signal(synch); P2: wait(synch); S2.</li>
-<li>No-busy-wait impl.: <b>block()</b> into waiting queue, <b>wakeup()</b> on signal. Negative S = no. of waiting processes.</li>
-<li>Misuse → <b>deadlock & starvation</b>: signal…wait swapped, wait…wait, omitting wait/signal.</li>
+<li><span class="k">Binary semaphore:</span> value only 0 or 1 – works like a mutex lock (mutual exclusion).</li>
+<li><span class="k">Counting semaphore:</span> any value – used to control a resource that has <b>n instances</b> (initialize S = n).</li>
+<li><b>Ordering use:</b> to make S1 (in P1) run before S2 (in P2): <code>synch = 0</code>; P1: S1; signal(synch); P2: wait(synch); S2.</li>
+<li><b>Without busy waiting:</b> wait() puts the process in the semaphore's waiting queue (<b>block()</b>); signal() wakes one up (<b>wakeup()</b>). A negative value = number of processes waiting.</li>
+<li><b>Wrong use causes deadlock/starvation:</b> writing signal before wait, wait twice, or forgetting wait/signal.</li>
 </ul>
 </section>
 
 <section>
-<h2>16. BOUNDED BUFFER (Producer–Consumer) <span class="s">★★★★★</span></h2>
-<p>Producer puts items into buffer of size <b>n</b>, consumer removes. Producer must wait if <b>full</b>; consumer waits if <b>empty</b>; no simultaneous buffer access.</p>
-<table><tr><th>Semaphore</th><th>Init</th><th>Purpose</th></tr>
-<tr><td>mutex</td><td>1</td><td>mutual exclusion on buffer</td></tr>
-<tr><td>empty</td><td><b>n</b></td><td>count of empty slots</td></tr>
-<tr><td>full</td><td><b>0</b></td><td>count of filled slots</td></tr></table>
-<pre>Producer:                    Consumer:
-do{ produce item;            do{ wait(full);
-  wait(empty);                 wait(mutex);
-  wait(mutex);                 remove item;
-  add item to buffer;          signal(mutex);
-  signal(mutex);               signal(empty);
-  signal(full);                consume item;
-}while(1);                   }while(1);</pre>
-<p class="imp">⚠ Swapping wait(empty)/wait(mutex) → DEADLOCK (producer holds mutex while buffer full).</p>
-<p>Without semaphores (counter++/counter--) → race condition. Unbounded buffer: no size limit.</p>
+<h2>16. BOUNDED BUFFER (PRODUCER–CONSUMER) <span class="s">★★★★★</span></h2>
+<div class="def"><b>Problem:</b> a <b>producer</b> process creates items and puts them into a shared buffer of fixed size <b>n</b>; a <b>consumer</b> process takes items out. Rules: (1) producer must <b>wait if the buffer is full</b>, (2) consumer must <b>wait if the buffer is empty</b>, (3) both must <b>not access the buffer at the same time</b>.</div>
+<table><tr><th>Semaphore</th><th>Initial</th><th class="l">Meaning</th></tr>
+<tr><td>mutex</td><td>1</td><td class="l">only one process touches buffer at a time</td></tr>
+<tr><td>empty</td><td><b>n</b></td><td class="l">number of empty slots (all empty at start)</td></tr>
+<tr><td>full</td><td><b>0</b></td><td class="l">number of filled slots (none at start)</td></tr></table>
+<pre>PRODUCER                    CONSUMER
+do {                        do {
+ produce item;               wait(full);   // item?
+ wait(empty); // free slot?  wait(mutex);  // lock
+ wait(mutex); // lock        remove item;
+ add item to buffer;         signal(mutex);// unlock
+ signal(mutex);// unlock     signal(empty);// +1 slot
+ signal(full); // +1 item    consume item;
+} while (true);             } while (true);</pre>
+<p class="imp">⚠ Order matters: if producer does wait(mutex) before wait(empty) when buffer is full, it holds the lock while sleeping → consumer can never enter → DEADLOCK.</p>
+<p>Unbounded buffer = no size limit (producer never waits). Using a plain <code>counter++ / counter--</code> instead of semaphores causes a race condition.</p>
 </section>
 
 <section>
-<h2>17. READERS–WRITERS <span class="s">★★★★★</span></h2>
-<p>Shared data: <b>many readers</b> may read together; a <b>writer needs exclusive</b> access (no reader/writer with it).</p>
-<p>Shared: <code>semaphore rw_mutex=1, mutex=1; int read_count=0;</code></p>
-<pre>Writer:              Reader:
-do{                  do{ wait(mutex);
- wait(rw_mutex);       read_count++;
- /* writing */         if(read_count==1)
- signal(rw_mutex);        wait(rw_mutex);
-}while(1);             signal(mutex);
+<h2>17. READERS–WRITERS PROBLEM <span class="s">★★★★★</span></h2>
+<div class="def"><b>Problem:</b> a shared data set (e.g. a database) is used by <b>readers</b> (only read) and <b>writers</b> (read &amp; modify). <b>Many readers can read at the same time</b> (reading doesn't change data), but a <b>writer needs exclusive access</b> – no other writer or reader may be present while it writes.</div>
+<p>Shared: <code>semaphore rw_mutex = 1;</code> (writer's lock) <code>semaphore mutex = 1;</code> (protects read_count) <code>int read_count = 0;</code> (readers currently reading)</p>
+<pre>WRITER               READER
+do {                 do {
+  wait(rw_mutex);      wait(mutex);
+  /* writing */        read_count++;
+  signal(rw_mutex);    if (read_count == 1)
+} while (true);           wait(rw_mutex); // 1st reader
+                       signal(mutex);     // blocks writers
                        /* reading */
                        wait(mutex);
                        read_count--;
-                       if(read_count==0)
-                          signal(rw_mutex);
-                       signal(mutex);
-                     }while(1);</pre>
+                       if (read_count == 0)
+                          signal(rw_mutex); // last reader
+                       signal(mutex);    // lets writer in
+                     } while (true);</pre>
 <ul>
-<li><b>First reader</b> locks out writers, <b>last reader</b> releases. <code>mutex</code> protects read_count.</li>
-<li><b>1st R-W problem (Reader preference)</b> – above code → <span class="imp">writers may starve</span>.</li>
-<li><b>2nd R-W problem (Writer preference)</b> – once a writer waits, no new reader enters → readers may starve.</li>
+<li><b>Logic:</b> the <b>first reader locks out writers</b>; later readers just enter; the <b>last reader to leave lets writers in</b>.</li>
+<li><b>First R-W problem (Readers' preference)</b> – the code above. No reader waits unless a writer is already writing → <span class="imp">writers may starve</span>.</li>
+<li><b>Second R-W problem (Writers' preference)</b> – once a writer is waiting, <b>no new reader</b> may start → <span class="imp">readers may starve</span>.</li>
 </ul>
 </section>
 
 <section>
-<h2>18. DINING PHILOSOPHERS <span class="s">★★★★★</span></h2>
-<p>5 philosophers, round table, 1 bowl of rice, <b>5 chopsticks</b> (one between each pair). Think ↔ eat; need <b>both left & right</b> chopsticks. <code>semaphore chopstick[5] = {1,1,1,1,1};</code></p>
-<pre>do{ wait(chopstick[i]);
-    wait(chopstick[(i+1)%5]);
-    /* eat */
-    signal(chopstick[i]);
-    signal(chopstick[(i+1)%5]);
-    /* think */ }while(1);</pre>
-<p class="imp">Problem: all 5 pick left chopstick simultaneously → all wait for right → DEADLOCK (circular wait). Also starvation.</p>
-<p><b>Remedies:</b> (1) allow at most <b>4</b> philosophers at table; (2) pick up only if <b>both</b> available (inside CS); (3) <b>asymmetric</b>: odd → left then right, even → right then left; (4) monitor solution with states THINKING/HUNGRY/EATING.</p>
-<h3>Sleeping Barber <span class="s">★★</span></h3>
-<p>1 barber, 1 barber chair, N waiting chairs. No customer → barber sleeps; customer wakes him; all chairs full → customer leaves. Semaphores: <code>customers=0, barber=0, mutex=1</code>, int <code>waiting=0</code>.</p>
-<pre>Barber: while(1){ wait(customers);
-  wait(mutex); waiting--; signal(barber);
-  signal(mutex); cut_hair(); }
+<h2>18. DINING PHILOSOPHERS PROBLEM <span class="s">★★★★★</span></h2>
+<div class="def"><b>Problem:</b> <b>5 philosophers</b> sit around a round table with a bowl of rice and <b>5 chopsticks</b> (one between each pair). A philosopher either <b>thinks</b> or <b>eats</b>. To eat, he needs <b>both</b> the left and right chopstick, picking them up one at a time; after eating he puts both down. It shows how to allocate several resources among processes <b>without deadlock and starvation</b>.</div>
+<pre>semaphore chopstick[5] = {1,1,1,1,1};
+// Philosopher i
+do {
+   wait(chopstick[i]);            // pick left
+   wait(chopstick[(i+1) % 5]);    // pick right
+   /* eat */
+   signal(chopstick[i]);          // put left
+   signal(chopstick[(i+1) % 5]);  // put right
+   /* think */
+} while (true);</pre>
+<p class="imp">Problem: if all 5 get hungry together and each picks up his left chopstick, every right chopstick is taken → everyone waits forever → DEADLOCK (circular wait). Starvation also possible.</p>
+<p><b>Solutions:</b> (1) allow at most <b>4</b> philosophers at the table at once; (2) pick up chopsticks only if <b>both are available</b> (do the picking inside a critical section); (3) <b>asymmetric</b>: odd philosopher picks left first then right, even picks right first then left; (4) monitor solution with states THINKING / HUNGRY / EATING.</p>
+<h3>Sleeping Barber Problem <span class="s">★★</span></h3>
+<p>A shop has 1 barber, 1 barber chair and <b>N waiting chairs</b>. No customers → barber <b>sleeps</b>. A customer arriving wakes the barber; if barber is busy he sits in a free chair; if all chairs are full he <b>leaves</b>. Semaphores: <code>customers = 0</code> (waiting customers), <code>barber = 0</code> (barber ready), <code>mutex = 1</code>; int <code>waiting = 0</code>.</p>
+<pre>Barber:  while(1){ wait(customers); wait(mutex);
+           waiting--; signal(barber);
+           signal(mutex); cut_hair(); }
 Customer: wait(mutex);
-  if(waiting&lt;N){ waiting++; signal(customers);
-    signal(mutex); wait(barber); get_cut(); }
-  else signal(mutex);          // leave</pre>
+  if (waiting &lt; N) { waiting++; signal(customers);
+     signal(mutex); wait(barber); get_cut(); }
+  else signal(mutex);      // shop full, leave</pre>
 </section>
 
 <section>
 <h2>19. DEADLOCK <span class="s">★★★★★</span></h2>
-<p>Set of processes each <b>waiting for a resource held by another</b> in the set → none proceeds. Resource use: <b>request → use → release</b>.</p>
-<div class="box"><b>4 Necessary Conditions (Coffman) – ALL must hold:</b><br>
-<b>1. Mutual Exclusion</b> – resource non-sharable.<br>
-<b>2. Hold & Wait</b> – holding ≥1 and waiting for more.<br>
-<b>3. No Preemption</b> – released only voluntarily.<br>
-<b>4. Circular Wait</b> – P0→P1→…→Pn→P0.</div>
+<div class="def"><b>Definition:</b> a situation where a set of processes are <b>blocked forever</b> because <b>each process is holding a resource and waiting for another resource held by some other process</b> in the same set. None can proceed. A process uses a resource as: <b>request → use → release</b>.</div>
+<p class="ex">Example: P1 holds the printer and wants the scanner; P2 holds the scanner and wants the printer → both wait forever. (DB: T1 locks table A wants B, T2 locks B wants A.)</p>
+<div class="box"><b>4 Necessary Conditions (Coffman) – deadlock happens only if ALL 4 hold at once:</b><br>
+<b>1. Mutual Exclusion</b> – at least one resource is non-sharable (only one process can use it at a time).<br>
+<b>2. Hold and Wait</b> – a process holds at least one resource while waiting for others.<br>
+<b>3. No Preemption</b> – a resource can't be taken away; it is released only voluntarily by the holder.<br>
+<b>4. Circular Wait</b> – a circular chain P0 waits for P1, P1 for P2, …, Pn waits for P0.</div>
 <h3>Resource Allocation Graph (RAG)</h3>
-<ul><li>Circle = process, box with dots = resource instances. <b>Request edge</b> Pi→Rj, <b>Assignment edge</b> Rj→Pi, <b>Claim edge</b> (dashed) Pi⇢Rj.</li>
-<li><mark>No cycle ⇒ no deadlock</mark>. Cycle + <b>single instance</b> per type ⇒ <b>deadlock</b>. Cycle + <b>multiple instances</b> ⇒ <b>possibility</b> only.</li></ul>
-<h3>Methods of Handling</h3>
-<p><b>Prevention</b> (break a condition) · <b>Avoidance</b> (never enter unsafe state) · <b>Detection & Recovery</b> · <b>Ignore</b> (Ostrich algo – Windows/UNIX).</p>
-<h3>Prevention <span class="s">★★★★</span></h3>
+<p>A graph showing which process holds/requests which resource. Circle = process, rectangle = resource type (dots = instances). <b>Request edge</b> Pi → Rj (Pi wants Rj); <b>Assignment edge</b> Rj → Pi (Pi holds Rj); <b>Claim edge</b> Pi ⇢ Rj dashed (may request in future).</p>
+<ul><li><mark>No cycle ⇒ no deadlock.</mark></li><li>Cycle + <b>one instance</b> per resource type ⇒ <b>deadlock certain</b>.</li><li>Cycle + <b>several instances</b> ⇒ deadlock <b>possible</b>, not certain.</li></ul>
+<h3>Methods for handling deadlock</h3>
+<p>(1) <b>Prevention</b> – ensure one of the 4 conditions can never hold. (2) <b>Avoidance</b> – check every request and never enter an unsafe state. (3) <b>Detection &amp; Recovery</b> – allow deadlock, detect it, then recover. (4) <b>Ignore</b> it (Ostrich algorithm – used by Windows/UNIX, since deadlocks are rare).</p>
+<h3>Deadlock Prevention <span class="s">★★★★</span> – break one condition</h3>
 <ul>
-<li><b>ME:</b> make resources sharable (read-only files) – not possible for printer.</li>
-<li><b>Hold&amp;Wait:</b> request all resources before start, or request only when holding none → low utilization, starvation.</li>
-<li><b>No Preemption:</b> if request can't be granted, release all held resources; restart later.</li>
-<li><b>Circular Wait:</b> impose <b>total ordering</b> of resource types; request in increasing order. (most practical)</li>
+<li><b>Mutual Exclusion:</b> make resources sharable (e.g. read-only files). Not possible for printers, so usually can't be broken.</li>
+<li><b>Hold &amp; Wait:</b> process must request <b>all</b> its resources before starting, or request only when it holds <b>none</b>. Drawback: low resource utilization, starvation.</li>
+<li><b>No Preemption:</b> if a process holding resources requests one that isn't free, it must <b>release all</b> it holds and restart later.</li>
+<li><b>Circular Wait:</b> number all resource types and force processes to request in <b>increasing order</b> only → no cycle can form. (Most practical.)</li>
 </ul>
-<h3>Avoidance</h3>
-<p>Each process declares <b>max</b> need a priori. <span class="k">Safe state</span>: exists a <b>safe sequence</b> &lt;P1..Pn&gt; where each Pi's need ≤ Available + held by all Pj (j&lt;i). <mark>Safe ⇒ no deadlock; Unsafe ⇒ possible deadlock</mark> (deadlock ⊂ unsafe). Single instance → <b>RAG with claim edges</b> (grant only if no cycle); multiple instances → <b>Banker's</b>.</p>
-<h3>Detection <span class="s">★★★</span></h3>
-<ul><li>Single instance: <b>wait-for graph</b> (remove resource nodes; Pi→Pj if Pi waits for Pj). Cycle ⇒ deadlock. O(n²).</li>
-<li>Multiple instances: like safety algo using <b>Request</b> matrix (Finish[i]=true if Allocation<sub>i</sub>=0). Any Finish[i]=false ⇒ Pi deadlocked.</li></ul>
-<h3>Recovery</h3>
-<p><b>Process termination:</b> abort all, or one at a time (choose by priority, time computed, resources used/needed, interactive/batch). <b>Resource preemption:</b> select victim (min cost) → <b>rollback</b> → avoid <b>starvation</b> (count rollbacks in cost).</p>
-<p class="kw">Case study: Oracle / MySQL InnoDB — T1 locks row 101 waits 202, T2 locks 202 waits 101 → circular wait; DB detects via wait-for graph, rolls back victim (ERROR 1213 / ORA-00060).</p>
+<h3>Deadlock Avoidance</h3>
+<p>Each process declares in advance the <b>maximum</b> resources it may need. Before granting a request, the OS checks that the system stays in a <b>safe state</b>.</p>
+<div class="def"><b>Safe state:</b> there exists at least one order (<b>safe sequence</b>) &lt;P1, P2, …, Pn&gt; in which every process can get its remaining need from available resources + those released by earlier processes, and finish. <mark>Safe ⇒ no deadlock. Unsafe ⇒ deadlock possible</mark> (not certain).</div>
+<p>Single instance of each resource → <b>RAG with claim edges</b> (grant request only if converting it to an assignment edge makes no cycle). Multiple instances → <b>Banker's algorithm</b>.</p>
+<h3>Deadlock Detection <span class="s">★★★</span></h3>
+<ul><li><b>Single instance:</b> build a <b>wait-for graph</b> (remove resource nodes; edge Pi → Pj means Pi waits for Pj). If it has a <b>cycle → deadlock</b>. Cycle detection costs O(n²).</li>
+<li><b>Multiple instances:</b> algorithm like Banker's safety check using a <b>Request</b> matrix; any process that can't finish is deadlocked.</li></ul>
+<h3>Recovery from Deadlock</h3>
+<ul><li><b>Process termination:</b> abort <b>all</b> deadlocked processes, or abort <b>one at a time</b> until the cycle breaks (choose by priority, how long it ran, resources held/needed, interactive or batch).</li>
+<li><b>Resource preemption:</b> take resources away – <b>select a victim</b> (minimum cost), <b>rollback</b> it to a safe state and restart, and avoid <b>starvation</b> (same process shouldn't always be the victim – count rollbacks).</li></ul>
+<p class="kw">Case study: Oracle / MySQL InnoDB – T1 locks row 101 and waits for row 202 while T2 locks 202 and waits for 101 → circular wait. DB detects it via wait-for graph and rolls back one transaction (victim) with a deadlock error.</p>
 </section>
 
 <section>
 <h2>20. BANKER'S ALGORITHM <span class="s">★★★★★</span></h2>
-<p>Deadlock <b>avoidance</b>, multiple instances. n processes, m resource types.</p>
-<p><b>Available[m]</b>, <b>Max[n][m]</b>, <b>Allocation[n][m]</b>, <mark>Need = Max − Allocation</mark>. Total = Available + ΣAllocation.</p>
-<h3>Safety Algorithm</h3>
-<p>1) Work=Available; Finish[i]=false ∀i. 2) find i: Finish[i]==false &amp;&amp; <b>Need<sub>i</sub> ≤ Work</b>; none → step 4. 3) <b>Work = Work + Allocation<sub>i</sub></b>; Finish[i]=true; go 2. 4) all Finish true ⇒ <b>SAFE</b>. Complexity O(m·n²).</p>
-<h3>Resource-Request Algorithm</h3>
-<p>1) Request<sub>i</sub> ≤ Need<sub>i</sub>? else <b>error</b> (exceeds max). 2) Request<sub>i</sub> ≤ Available? else <b>wait</b>. 3) Pretend: Available −= Req; Alloc<sub>i</sub> += Req; Need<sub>i</sub> −= Req → run safety: safe ⇒ <b>grant</b>, unsafe ⇒ restore & wait.</p>
-<h3>Numerical 1 (A=10, B=5, C=7)</h3>
-<table><tr><th>P</th><th>Alloc ABC</th><th>Max ABC</th><th>Need ABC</th></tr>
+<div class="def"><b>Definition:</b> a <b>deadlock-avoidance</b> algorithm for resources with <b>multiple instances</b>. Like a bank that never lends money in a way that it can't satisfy all customers. Each process declares its <b>maximum need</b>; a request is granted <b>only if the system stays in a safe state</b> after granting it.</div>
+<p><b>Data structures</b> (n processes, m resource types): <b>Available[m]</b> – free instances of each type; <b>Max[n][m]</b> – max demand of each process; <b>Allocation[n][m]</b> – currently given; <b>Need[n][m]</b> = <mark>Max − Allocation</mark> (still may ask). Also <b>Total = Available + sum of Allocation</b>.</p>
+<h3>Safety Algorithm (is the state safe?)</h3>
+<ol><li>Work = Available; Finish[i] = false for all i.</li>
+<li>Find a process i with Finish[i] = false and <b>Need<sub>i</sub> ≤ Work</b>. If none, go to step 4.</li>
+<li>Pretend it finishes and returns its resources: <b>Work = Work + Allocation<sub>i</sub></b>; Finish[i] = true; go to step 2.</li>
+<li>If all Finish[i] = true → <b>SAFE</b> (the order you picked is the safe sequence); otherwise <b>UNSAFE</b>.</li></ol>
+<h3>Resource-Request Algorithm (Pi asks Request<sub>i</sub>)</h3>
+<ol><li>If Request<sub>i</sub> ≤ Need<sub>i</sub> go on; else <b>error</b> (asked more than its max).</li>
+<li>If Request<sub>i</sub> ≤ Available go on; else Pi must <b>wait</b>.</li>
+<li><b>Pretend to allocate:</b> Available −= Request; Allocation<sub>i</sub> += Request; Need<sub>i</sub> −= Request. Run safety algorithm: safe → <b>grant</b>; unsafe → undo and Pi <b>waits</b>.</li></ol>
+<h3>Numerical 1 — 5 processes, A=10, B=5, C=7</h3>
+<table><tr><th>P</th><th>Allocation A B C</th><th>Max A B C</th><th>Need = Max − Alloc</th></tr>
 <tr><td>P0</td><td>0 1 0</td><td>7 5 3</td><td>7 4 3</td></tr><tr><td>P1</td><td>2 0 0</td><td>3 2 2</td><td>1 2 2</td></tr><tr><td>P2</td><td>3 0 2</td><td>9 0 2</td><td>6 0 0</td></tr><tr><td>P3</td><td>2 1 1</td><td>2 2 2</td><td>0 1 1</td></tr><tr><td>P4</td><td>0 0 2</td><td>4 3 3</td><td>4 3 1</td></tr></table>
-<p>Available = <b>(3,3,2)</b> [= 10,5,7 − Σalloc 7,2,5]</p>
-<table><tr><th>Step</th><th>Pick</th><th>Need ≤ Work?</th><th>New Work</th></tr>
-<tr><td>1</td><td>P1</td><td>122 ≤ 332 ✓</td><td>5 3 2</td></tr><tr><td>2</td><td>P3</td><td>011 ≤ 532 ✓</td><td>7 4 3</td></tr><tr><td>3</td><td>P0</td><td>743 ≤ 743 ✓</td><td>7 5 3</td></tr><tr><td>4</td><td>P2</td><td>600 ≤ 753 ✓</td><td>10 5 5</td></tr><tr><td>5</td><td>P4</td><td>431 ≤ 1055 ✓</td><td>10 5 7</td></tr></table>
-<p>✅ <b>SAFE</b>: &lt;P1, P3, P0, P2, P4&gt; — other valid orders (e.g. &lt;P1,P3,P4,P2,P0&gt;) also get full marks.</p>
-<p><b>Request P1 (1,0,2):</b> ≤ Need(1,2,2) ✓, ≤ Avail(3,3,2) ✓ → Avail=(2,3,0), Alloc P1=(3,0,2), Need P1=(0,2,0). Safety → &lt;P1,P3,P4,P0,P2&gt; safe ⇒ <b>GRANT</b>. (Then P4 req (3,3,0) ⇒ &gt; Avail → wait; P0 req (0,2,0) ⇒ unsafe → deny.)</p>
-<h3>Numerical 2 (X Y Z), Available = (1,1,2)</h3>
-<table><tr><th>P</th><th>Alloc</th><th>Max</th><th>Need</th></tr>
+<p>Available = Total − ΣAllocation = (10,5,7) − (7,2,5) = <b>(3,3,2)</b></p>
+<table><tr><th>Step</th><th>Process</th><th>Need ≤ Work ?</th><th>Work = Work + Alloc</th></tr>
+<tr><td>1</td><td>P1</td><td>(1,2,2) ≤ (3,3,2) ✓</td><td>(5,3,2)</td></tr><tr><td>2</td><td>P3</td><td>(0,1,1) ≤ (5,3,2) ✓</td><td>(7,4,3)</td></tr><tr><td>3</td><td>P0</td><td>(7,4,3) ≤ (7,4,3) ✓</td><td>(7,5,3)</td></tr><tr><td>4</td><td>P2</td><td>(6,0,0) ≤ (7,5,3) ✓</td><td>(10,5,5)</td></tr><tr><td>5</td><td>P4</td><td>(4,3,1) ≤ (10,5,5) ✓</td><td>(10,5,7)</td></tr></table>
+<p>✅ All finish → <b>SAFE</b>, safe sequence <b>&lt;P1, P3, P0, P2, P4&gt;</b>. (Other valid orders like &lt;P1,P3,P4,P2,P0&gt; are also correct.)</p>
+<p><b>Can P1's request (1,0,2) be granted?</b> Step 1: (1,0,2) ≤ Need P1 (1,2,2) ✓. Step 2: (1,0,2) ≤ Available (3,3,2) ✓. Step 3: pretend → Available = (2,3,0), Allocation P1 = (3,0,2), Need P1 = (0,2,0). Safety check gives &lt;P1, P3, P4, P0, P2&gt; → safe → <b>GRANT</b>. (After this, P4 asking (3,3,0) must <b>wait</b> – more than Available; P0 asking (0,2,0) is <b>denied</b> – resulting state unsafe.)</p>
+<h3>Numerical 2 — 4 processes (X Y Z), Available = (1,1,2)</h3>
+<table><tr><th>P</th><th>Allocation</th><th>Max</th><th>Need</th></tr>
 <tr><td>P0</td><td>2 1 1</td><td>5 1 3</td><td>3 0 2</td></tr><tr><td>P1</td><td>1 0 1</td><td>2 1 2</td><td>1 1 1</td></tr><tr><td>P2</td><td>4 1 2</td><td>7 2 3</td><td>3 1 1</td></tr><tr><td>P3</td><td>1 0 0</td><td>2 1 1</td><td>1 1 1</td></tr></table>
-<p>Work 112 → P1 (111≤112) → <b>213</b> → P3 (111≤213) → <b>313</b> → P0 (302≤313) → <b>524</b> → P2 (311≤524) → <b>936</b>.</p>
-<p>✅ <b>SAFE</b>: &lt;P1, P3, P0, P2&gt;. Check: final Work = Total = (9,3,6).</p>
-<p class="kw">Keywords: a-priori max claim, safe sequence, Need ≤ Work, pretend allocation, Work += Allocation</p>
+<p>Work (1,1,2) → <b>P1</b> (1,1,1 ≤ 1,1,2) → Work (2,1,3) → <b>P3</b> (1,1,1 ≤ 2,1,3) → (3,1,3) → <b>P0</b> (3,0,2 ≤ 3,1,3) → (5,2,4) → <b>P2</b> (3,1,1 ≤ 5,2,4) → (9,3,6).</p>
+<p>✅ <b>SAFE</b>, safe sequence <b>&lt;P1, P3, P0, P2&gt;</b>. Check: final Work (9,3,6) = Total resources.</p>
+<p class="kw">Keywords: deadlock avoidance, a-priori maximum claim, safe sequence, Need ≤ Work, Work += Allocation, pretend allocation</p>
 </section>
 
 <section>
-<h2>⚡ EXAM QUICK-HITS <span class="s">★★★★</span></h2>
+<h2>⚡ EXAM QUICK-HITS (MCQ) <span class="s">★★★★</span></h2>
 <ul>
-<li>Dispatcher gives CPU to process chosen by <b>short-term scheduler</b>; dispatch latency.</li>
-<li>Semaphore is an <b>integer variable</b>; two kinds: <b>binary & counting</b>.</li>
-<li>Bounded buffer = <b>Producer–Consumer</b>. Circular wait prevented by <b>linear ordering</b> of resources.</li>
-<li>Dining problem occurs with <b>5 philosophers, 5 chopsticks</b>. Writers get <b>exclusive</b> access.</li>
-<li>Wait-for graph Pi→Pj ⇒ Pi waiting for Pj; applies to <b>single-instance</b> resources.</li>
-<li>Algorithm with no ME guarantee: <b>Round Robin</b> (it's scheduling, not sync).</li>
-<li>Thread shares <b>memory space</b> with parent; owns PC, registers, stack.</li>
-<li>HT duplicates <b>registers</b> per core → <b>2 logical processors</b>.</li>
-<li>RTOS requirement: <b>predictable timing</b>. MLFQ uses <b>dynamic feedback</b>.</li>
-<li>Busy waiting = <b>spinlock</b>; wastes CPU but no context switch (good on multicore, short waits).</li>
+<li>Module that gives CPU to the process chosen by short-term scheduler = <b>dispatcher</b>.</li>
+<li>Semaphore is an <b>integer variable</b>; two kinds: <b>binary &amp; counting</b>.</li>
+<li>Bounded buffer problem is also called <b>Producer–Consumer</b>.</li>
+<li>Circular wait is prevented by <b>linear ordering of resource types</b>.</li>
+<li>Dining philosophers occurs with <b>5 philosophers and 5 chopsticks</b>.</li>
+<li>In readers–writers, <b>writers</b> are given exclusive access.</li>
+<li>Edge Pi → Pj in wait-for graph means <b>Pi is waiting for Pj</b>; used when each resource has a <b>single instance</b>.</li>
+<li>No cycle in RAG ⇒ system is <b>not deadlocked</b>. Deadlock-avoidance algorithm = <b>Banker's</b>.</li>
+<li>Round Robin is a scheduling algorithm – it does <b>not</b> guarantee mutual exclusion.</li>
+<li>Thread shares <b>memory space</b> with its process; HT gives <b>2 logical processors</b> per core and duplicates <b>registers</b>.</li>
+<li>RTOS must provide <b>predictable timing</b>. MLFQ uses <b>dynamic feedback</b>.</li>
+<li>Busy waiting = <b>spinlock</b>: wastes CPU but avoids context switch (fine for very short waits on multicore).</li>
 </ul>
 </section>
 </div>
